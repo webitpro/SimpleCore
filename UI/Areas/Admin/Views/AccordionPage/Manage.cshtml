@@ -1,0 +1,69 @@
+﻿@model Accordion
+@{
+    ViewBag.Title = ViewData["Title"];
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var pageId = 0;
+    if (ViewData["PageId"] != null)
+    {
+        pageId = Convert.ToInt32(ViewData["PageId"]);
+    }
+    string body = "";
+    if (!string.IsNullOrEmpty(Model.Body))
+    {
+        body = HttpUtility.HtmlDecode(Model.Body);
+    }
+}
+
+<div class="actionBox">
+    <h2>@ViewData["Title"]</h2>
+    <div class="actionContent">
+        
+        <h4>Page: @Engine.Page.RetrieveById(pageId).Title</h4>   
+
+        @{ Html.BeginForm(new { controller="AccordionPage", action=ViewData["Action"] }); }
+
+        @if(!ViewData.ModelState.IsValid)
+        {
+            <p class="error">@Html.ValidationSummary(true)</p>
+        }
+        @if(ViewData["Action"].Equals("Update"))
+        {
+            @Html.HiddenFor(m => m.Id)
+        }
+        
+        @if(pageId > 0)
+        {
+            @Html.Hidden("pageId", pageId);
+        }
+
+        <h4>Header:</h4>
+        @Html.TextBoxFor(m => m.Header)
+        <span class="error">@Html.ValidationMessageFor(m=>m.Header)</span>
+    
+        <h4>Body:</h4>
+         @Html.TextArea("body", @body)
+        <span class="error">@Html.ValidationMessageFor(m=>m.Body)</span>
+
+        <div class="buttonContainer">
+            <input type="submit" value="Save" class="button" />
+            <input type="button" value="Cancel" class="button" onclick="window.location='@Url.Action("Index", "AccordionPage", new { pageId = @pageId })';" />
+            
+        </div>
+
+        @{ Html.EndForm(); }
+    </div>
+</div>
+@section HeadScripts
+{
+    <script type="text/javascript" src="/Areas/Admin/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="/Areas/Admin/ckeditor/adapters/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            $('#body').ckeditor
+            (
+                { width: '100%', height: '300px' }
+            );
+        });
+    </script>
+}

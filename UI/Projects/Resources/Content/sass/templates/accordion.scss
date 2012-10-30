@@ -1,0 +1,25 @@
+@import "base";
+
+.page-accordion
+{
+
+	.acc_trigger {
+	  font-size: 14px;
+	
+	  a:link,
+	  a:visited {
+			display: block;
+			text-decoration: none;
+		}
+	}
+
+	.acc_container {
+		display: none;
+
+	  // Styling
+	  border-left: 3px solid #ccc;
+	  margin-left: 20px;
+	  padding-left: 20px; 
+	}
+
+}

@@ -1,0 +1,53 @@
+﻿@model Account
+
+@{
+    ViewBag.Title = ViewData["Title"];
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Security.Role role = (Security.Role)Security.User.GetInfo(Core.Helpers.Security.AuthenticatedUser.Info.Role);
+}
+<div class="actionBox">
+    <h2>@ViewData["Title"]</h2>
+    <div class="actionContent">
+        
+        @{ Html.BeginForm(new { controller="Account", action=ViewData["Action"] }); }
+
+        @if(!ViewData.ModelState.IsValid)
+        {
+            <p class="error">@Html.ValidationSummary(true)</p>
+        }
+        @if(ViewData["Action"].Equals("Update"))
+        {
+            @Html.HiddenFor(m => m.Id)
+        }
+
+        <h4>First Name:</h4>
+        @Html.TextBoxFor(m=>m.FirstName)
+        <span class="error">@Html.ValidationMessageFor(m=>m.FirstName)</span>
+
+        <h4>Last Name:</h4>
+        @Html.TextBoxFor(m=>m.LastName)
+        <span class="error">@Html.ValidationMessageFor(m=>m.LastName)</span>
+
+        <h4>Email Address:</h4>
+        @Html.TextBoxFor(m=>m.Email)
+        <span class="error">@Html.ValidationMessageFor(m=>m.Email)</span>
+
+        <h4>Password:</h4>
+        @Html.Password("newPassword", "")
+        <span class="error">@Html.ValidationMessageFor(m=>m.Password)</span>
+
+        <h4>Security Role:</h4>
+        @Html.DropDownListFor(m=>m.SecurityRole, Form.Element.DropDown.User.Roles(null, role))
+        <span class="error">@Html.ValidationMessageFor(m=>m.SecurityRole)</span>
+
+              
+
+        <div class="buttonContainer">
+            <input type="submit" value="Save" class="button" />
+            <input type="button" value="Cancel" class="button" onclick="window.location='@Url.Action("Index", "Account")';" />
+        </div>
+
+        @{ Html.EndForm(); }
+    </div>
+</div>
+

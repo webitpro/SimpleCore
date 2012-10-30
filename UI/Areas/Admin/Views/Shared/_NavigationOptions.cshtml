@@ -1,0 +1,26 @@
+﻿@{   
+    
+    if (Core.Helpers.Security.User.IsAuthenticated())
+    {
+
+        var a = ViewContext.RouteData.Values["action"].ToString();
+        var c = ViewContext.RouteData.Values["controller"].ToString();
+        
+        
+        if(c.Equals("NavTab"))
+        {
+            @Html.ActionLink("Tabs", "Index", new { controller = "NavTab" }, new { @class = "navButton" + ((c.Equals("NavTab")) ? " selected" : "") });
+        }
+        if(c.Equals("NavSection"))
+        {    
+            @Html.ActionLink("Tabs", "Index", new { controller = "NavTab" }, new { @class = "navButton" + ((c.Equals("NavTab")) ? " selected" : "") });
+            @Html.ActionLink("Sections", "Index", new { controller = "NavSection", id = ViewContext.RouteData.Values["id"].ToString() }, new { @class = "navButton" + ((c.Equals("NavSection")) ? " selected" : "") });
+        }
+        if (c.Equals("NavLink"))
+        {            
+            @Html.ActionLink("Tabs", "Index", new { controller = "NavTab" }, new { @class = "navButton" + ((c.Equals("NavTab")) ? " selected" : "") });
+            @Html.ActionLink("Sections", "Index", new { controller = "NavSection", id = Engine.Navigation.Tab.IdBySection(Convert.ToInt32(ViewContext.RouteData.Values["id"])) }, new { @class = "navButton" + ((c.Equals("NavSection")) ? " selected" : "") });
+            @Html.ActionLink("Links", "Index", new { controller = "NavLink" }, new { @class = "navButton" + ((c.Equals("NavLink")) ? " selected" : "") });
+        }
+    }
+}

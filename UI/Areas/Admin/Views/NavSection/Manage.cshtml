@@ -1,0 +1,182 @@
+﻿@model Section
+@{
+    ViewBag.Title = ViewData["Title"];
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var tabId = 0;
+    if(ViewData["TabId"] != null)
+    {
+        tabId = Convert.ToInt32(ViewData["TabId"]);
+    }
+
+    var selectedTemplate = "";
+    var selectedPage = "";
+    var isLink = false;
+    if (Model != null)
+    {
+        if (Model.PageId != null)
+        {
+            selectedPage = Model.PageId.ToString();
+            selectedTemplate = Engine.Page.Template(Model.PageId);
+            isLink = true;
+        }
+    }
+    
+    Security.Role role = (Security.Role)Security.User.GetInfo(Core.Helpers.Security.AuthenticatedUser.Info.Role); 
+    
+}
+
+<div class="actionBox">
+    <h2>@ViewData["Title"]</h2>
+    <div class="actionContent">
+        @{ Html.BeginForm(new { controller = "NavSection", action = ViewData["Action"] }); }
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <p class="error">@Html.ValidationSummary(true)</p>
+        }
+        @if (ViewData["Action"].Equals("Update"))
+        {
+            @Html.HiddenFor(m => m.Id)
+        }
+
+        @if (tabId > 0)
+        {
+            @Html.Hidden("tabId", tabId)
+        }
+        
+        <h4>Tab: @Engine.Navigation.Tab.Info(tabId).Title</h4>
+        
+
+        <h4>Title:</h4>
+        @Html.TextBoxFor(m => m.Title)
+        <span class="error">@Html.ValidationMessageFor(m => m.Title)</span>
+
+        <h4>URL Title:</h4>
+        @Html.TextBoxFor(m => m.UrlTitle, new { @readonly = "readonly" })
+        <span class="error">@Html.ValidationMessageFor(m => m.UrlTitle)</span>
+        
+        <h4>Is Hidden? @Html.CheckBoxFor(m => m.IsHidden)</h4>
+
+        <h4>Link to Page? @Html.CheckBox("chkLinkToPage", isLink, new { @id = "chkLinkToPage" })
+        </h4>
+
+        <div id="linkToPage" style="display: none;">
+
+            <h4>Template:</h4>
+            @Html.DropDownList("temp", Form.Element.DropDown.Template.List(selectedTemplate, role))
+
+            <h4>Page:</h4>
+            @Html.DropDownListFor(m => m.PageId, new List<SelectListItem>())
+            <span class="error">@Html.ValidationMessageFor(m => m.PageId)</span>
+
+        </div>
+
+        <div class="buttonContainer">
+            <input type="submit" value="Save" class="button" />
+            <input type="button" value="Cancel" class="button" onclick="window.location='@Url.Action("Index", "NavSection", new { id = tabId })';" />
+            
+        </div>
+
+        @{ Html.EndForm(); }
+    </div>
+</div>
+@section BodyScripts
+{
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            Lib.Utils(function ()
+            {
+                Lib.NavEngine(function ()
+                {
+                    Lib.Ajax(function ()
+                    {
+                        var NavSection =
+                        {
+                            RenderLinkToPageSection: function ()
+                            {
+                                if ($('#chkLinkToPage').attr('checked'))
+                                {
+                                    //checked, show
+                                    $('#linkToPage').show();
+                                }
+                                else
+                                {
+                                    //not checked, hide
+                                    $('#linkToPage').hide();
+                                }
+                            },
+                            FilterPages: function ()
+                            {
+                                $('#temp option:selected').each(function ()
+                                {
+                                    var url = '/API/Engine/GetPagesByTmpl/';
+                                    var data = { "tmpl": $(this).val() };
+
+                                    Ajax.Run(url, data, function (r)
+                                    {
+                                        if (r.Success)
+                                        {
+                                            $('#PageId').find('option').remove().end();
+
+                                            var arr = r.Result;
+                                            for (i = 0; i < arr.length; i++)
+                                            {
+                                                var page = arr[i];
+
+                                                if ("@selectedPage" != "")
+                                                {
+                                                    if (parseInt("@selectedPage") == parseInt(page.id))
+                                                    {
+                                                        $('#PageId').append("<option selected='selected' value='" + page.id + "'>" + page.title + "</option>");
+                                                    }
+                                                    else
+                                                    {
+                                                        $('#PageId').append("<option value='" + page.id + "'>" + page.title + "</option>");
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    $('#PageId').append("<option value='" + page.id + "'>" + page.title + "</option>");
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Ajax.Error(r);
+                                        }
+                                    });
+                                });
+                            }
+                        };
+                        //set events
+                        $('#Title').keyup(function ()
+                        {
+                            $('#Title').val(NavEngine.FormatInput('Title'));
+                            $('#UrlTitle').val(NavEngine.FormatUrl('Title'));
+                        });
+                    
+                        $('#chkLinkToPage').click(function ()
+                        {
+                            NavSection.RenderLinkToPageSection();
+                        });
+
+                        $('#temp').change(function ()
+                        {
+                            NavSection.FilterPages();
+                        });
+
+                        //initialize
+                        NavSection.RenderLinkToPageSection();
+                        NavSection.FilterPages();
+
+                        
+                    });
+                });
+            }); 
+        });
+
+        
+    </script>
+}
+

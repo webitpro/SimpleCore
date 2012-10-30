@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Accordion>
+@{
+    ViewBag.Title = "Accordion";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var pageId = 0;
+    if (ViewData["PageId"] != null)
+    {
+        pageId = Convert.ToInt32(ViewData["PageId"]);
+    }
+}
+
+<div class="actionBox">
+<h2>FAQs</h2>
+    <div class="actionContent"> 
+        <h4>Page: @Engine.Page.RetrieveById(pageId).Title</h4>       
+        <p class="headerOptions">
+            @Html.ActionLink("<< Pages", "Index", new { controller = "Page", action = "Index" }) <span class="divider">|</span> @Html.ActionLink("Add Accordion Item", "Manage", new { controller = "AccordionPage", pageId = pageId })
+            @if(Model != null && Model.Count() > 0)
+            {
+                <span class="divider">|</span>
+                <a href="#" onclick="Sort.Open(this, 'accordionSort', 'Accordion Sort');">Sort</a>
+            } 
+        </p>
+        @{
+            if(Request.QueryString["eid"] != null)
+            {
+                <p class="error">@TempData[Request.QueryString["eid"].ToString()].ToString()</p>
+            }
+        }
+        <table class="dataGrid" cellspacing="0" cellpadding="5">
+            <tr class="headerRow">
+                <th>Header</th>
+                <th>Body</th>
+                <th>Actions</th>
+            </tr>
+            @foreach (var q in Model)
+            {
+                <tr>
+                    <td>@q.Header</td>
+                    <td style="width: 40%;">@Html.Raw(HttpUtility.HtmlDecode(q.Body))</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Manage", new { controller = "AccordionPage", action = "Manage", id = q.Id, pageId = pageId })
+                        <span class="divider">|</span>
+                        @Form.Element.ActionLink.Delete("Admin", "AccordionPage", "Delete", q.Id, q.Header, "Question/Answer", new Arguments[] { new Arguments{ Name = "pageId", Value = pageId.ToString() }})
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<div id="accordionSort" class="sort-window"> 
+    <div class="header"></div>        
+    <div class="body">
+        <div>
+            @Html.DropDownList("sortAccordions", Form.Element.MultiSelect.Page.Accordions(pageId,null), new { @selectionMode = "Single", @style = "width: 500px;", @size = "5" })
+        </div>
+        <div class="select-buttons">
+            <div class="up" onclick="Sort.Up('sortAccordions');"></div>
+            <div class="down" onclick="Sort.Down('sortAccordions');"></div>
+        </div>
+        <div class="button-container">
+            <input type="button" class="button" value="Save" onclick="Sort.Save('sortAccordions', 'accordionSort', 'accordion', @pageId);"/>
+            &nbsp;
+            <input type="button" class="button" value="Cancel" onclick="Sort.Close('accordionSort');" />
+        </div>
+    </div>
+ </div>
+@section BodyScripts
+{
+    <script type="text/javascript">
+        Load.JS('@Reference.Url(Reference.Directory.js, "Sort.min.js", "lib/engine/")', true, function ()
+        {
+            Load.JS('@Reference.Url(Reference.Directory.js, "Page.min.js", "lib/engine/")', true);
+        });
+    </script>
+}
+ 

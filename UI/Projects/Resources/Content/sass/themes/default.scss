@@ -1,0 +1,191 @@
+@import "base";
+
+
+// Colors
+$color_primary: #C42023;
+$color_text: #515151;
+
+
+// HTML
+html {
+  color: $color_text;
+  font-family: $trebuchet;
+}
+
+a:link,
+a:visited {
+  color: $color_primary;
+}
+
+
+// Header
+#header {
+  background: $color_primary;
+  @include background-image(linear-gradient(#E11C22, $color_primary));
+
+  .inner {
+    padding: 10px;
+  }
+}
+
+
+// Site name
+h1#site-name {
+  color: #fff;
+  font-weight: normal;
+  
+  .small {
+    font-size: 50%;
+    vertical-align: super;
+  }
+}
+
+
+// Navigation
+#navigation {
+  background: #f8f8f8;
+  @include background-image(linear-gradient(#FAFAFA, #EAEAEA));
+  border-bottom: 1px solid #CACACA;
+  @include box-shadow(rgba(0, 0, 0, 0.1) 0 0 3px 1px inset);
+  font-size: 12px;
+
+  .navigation-inner {
+    border-bottom: 1px solid #fff;
+  }
+
+  ul.menu { /* Menu block links */
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    text-align: left; /* LTR */
+    text-transform: uppercase;
+
+    li { /* A simple method to get navigation links to appear in one line. */
+      float: left; /* LTR */
+      padding: 0; /* LTR */
+      list-style-type: none;
+      list-style-image: none;
+
+      &:hover {
+        background: $color_primary;
+      }
+
+      a:link,
+      a:visited {
+        color: $color_primary;
+        display: block;
+        padding: 10px 15px 9px 15px;
+        text-decoration: none;
+
+        &:hover,
+        &:focus,
+        &.active {
+          background: $color_primary;
+          color: #fff;
+        }
+      }
+
+      // Expanded menu - Positioning
+      ul {
+        left: -999em;
+        position: absolute;
+        text-transform: none;
+      }
+
+      &:hover ul {
+        display: block;
+        left: auto;
+        margin: 0;
+        width: 200px;
+
+        li {
+          float: none; 
+
+          a:link,
+          a:visited {
+          color: #ddd;
+
+            &:hover,
+            &:focus {
+              color: #fff;
+            }
+          }
+
+          &:hover {
+            ul {
+              display: block;
+              left: auto;
+              margin-left: 200px;
+              top: 0;
+              width: 200px;
+            } 
+          }
+        }
+
+        ul {
+          left: -999em;
+          position: absolute;
+        }
+      }
+
+      // Expanded menu - Font styling
+      &.last:hover ul {
+        right: 0;
+      }
+
+      &.expanded:hover > a:link,
+      &.expanded:hover > a:visited {
+        color: #fff;
+      }
+
+      &:hover ul a:link,
+      &:hover ul a:visited,
+      &.expanded a:hover,
+      &.expanded a:focus {
+        color: #fff;
+        display: block;
+      }
+
+      &.expanded ul a:link,
+      &.expanded ul a:visited {
+        background: $color_primary;
+        color: #fff;
+        display: block;
+        padding: 7px 15px 8px 15px;
+      }
+
+      &.expanded li:hover > a:link,
+      &.expanded li:hover > a:visited,
+      &.expanded ul ul a:link,
+      &.expanded ul ul a:visited {
+        background: #a71b1e;
+      }
+
+      &.expanded ul a.active {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+
+// Footer
+#footer {
+	border-top: 1px solid #ccc;
+  color: $color_primary;
+  font-size: 12px;
+	margin-top: 10px;
+	padding-top: 10px;
+
+  .column-first {
+    float: left;
+  }
+
+  .column-last {
+    display: block;
+    float: right;
+    text-align: right;
+    width: 175px;
+  }
+}
+

@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Core.Models.Page>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Security.Role role = (Security.Role)Security.User.GetInfo(Core.Helpers.Security.AuthenticatedUser.Info.Role); 
+}
+<div class="actionBox">
+<h2>Pages</h2>
+    <div class="actionContent">
+        <p class="headerOptions">@Html.ActionLink("Add Page", "Manage", new { controller = "Page" })</p>
+        @{
+            if(Request.QueryString["eid"] != null)
+            {
+                <p class="error">@TempData[Request.QueryString["eid"].ToString()].ToString()</p>
+            }
+        }
+        <div>
+            <h4>Display</h4>
+            @Html.DropDownList("filter", @Form.Element.DropDown.Template.List("", role), new { id="filter" })
+        </div>
+        <table class="dataGrid" cellspacing="0" cellpadding="5">
+            <tr class="headerRow">
+                <th>Title</th>
+                <th>Template</th>
+                <th>Is Home Page?</th>
+                <th>Actions</th>
+            </tr>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@p.Title</td>
+                    <td class="tmpl">@p.Template.Replace("_", " ")</td>
+                    <td style="width: 100px;">@((p.IsHomePage) ? "Yes" : "No")</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Manage", new { controller = "Page", action = "Manage", id = p.Id })
+                        <span class="divider">|</span>
+                        @Form.Element.ActionLink.Delete("Admin", "Page", "Delete", p.Id, p.Title, "Page") 
+                        <span class="divider">|</span>            
+                        @{
+                            switch ((Engine.Template.Id)Enum.Parse(typeof(Engine.Template.Id), p.Template))
+                            {
+                                case Engine.Template.Id.Static_Page:
+                                    @Html.ActionLink("Body", "Index", new { controller = "StaticPage", action = "Index", pageId = p.Id })
+                                    break;
+                                case Engine.Template.Id.Custom_Page:
+                                    @Html.ActionLink("Body", "Index", new { controller = "CustomPage", action = "Index", pageId = p.Id })
+                                    break;
+                                case Engine.Template.Id.Accordion:
+                                    @Html.ActionLink("Body", "Index", new { controller = "AccordionPage", action = "Index", pageId = p.Id })
+                                    <span class="divider">|</span>
+                                    @Html.ActionLink("Intro", "Intro", new { controller = "Component", action = "Intro", pageId = p.Id })
+                               break;
+
+
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+        $('#filter').append('<option value="All" selected="selected">All</option>');
+        $('#filter').change(function ()
+        {
+            $('#filter option:selected').each(function ()
+            {
+                var tmpl = $(this).text();
+                Page.Filter(tmpl);
+            });
+        });
+
+
+        $('#filter option:selected').each(function ()
+        {
+            var tmpl = $(this).text();
+            Page.Filter(tmpl);
+        });
+    });
+    var Page =
+    {
+        Filter: function (tmpl)
+        {
+            $('.dataGrid td.tmpl').each(function ()
+            {
+                if (tmpl == "All")
+                {
+                    $(this).parent('tr').show('slow');
+                }
+                else
+                {
+                    if ($(this).html() == tmpl)
+                    {
+                        $(this).parent('tr').show('slow');
+                    }
+                    else
+                    {
+                        $(this).parent('tr').hide('slow');
+                    }
+                }
+            });
+        }
+    };
+</script>

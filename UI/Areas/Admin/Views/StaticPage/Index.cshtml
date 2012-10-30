@@ -1,0 +1,73 @@
+﻿@model StaticPage
+@{
+    ViewBag.Title = "Body";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var pageId = 0;
+    if(ViewData["PageId"] != null)
+    {
+        pageId = Convert.ToInt32(ViewData["PageId"]);
+    }
+    string content = "";
+    if(!string.IsNullOrEmpty(Model.Content))
+    {
+        content = HttpUtility.HtmlDecode(Model.Content);
+    }
+
+    Core.Models.Page pg = null;
+    if(pageId > 0)
+    {
+        IRepository<Core.Models.Page> repo = new DB.Repository<Core.Models.Page>(new DB.Context());
+        pg = repo.RetrieveById(pageId);   
+    }
+}
+
+<div class="actionBox">
+    <h2>Static Page</h2>
+    <div class="actionContent">
+    <h3>Page: @pg.Title</h3>
+        <p class="headerOptions">
+             @Html.ActionLink("<< Pages", "Index", new{controller = "Page", action = "Index"})        
+        </p>
+        @if(!ViewData.ModelState.IsValid)
+        {
+            <p class="error">@Html.ValidationSummary(true)</p>
+        }
+        
+        @using (Html.BeginForm("Index", "StaticPage", new { controller = "StaticPage", action = "Index", pageId = @pageId }, FormMethod.Post))
+        {            
+            @Html.Hidden("pageId", pageId);
+                                          
+            <h4>Content:</h4>
+            @Html.TextArea("rte", @content)
+            
+            <div class="buttonContainer">
+                <input type="submit" value="Save" class="button" />
+                <input type="button" value="Cancel" class="button" onclick="window.location='@Url.Action("Index", "Page", new { controller = "Page" })';" />
+            </div>
+        }
+      
+     </div>
+</div>
+@section HeadScripts
+{
+    <script type="text/javascript" src="/Areas/Admin/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="/Areas/Admin/ckeditor/adapters/jquery.js"></script>
+    <script type="text/javascript" src="/Areas/Admin/ckfinder/ckfinder.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            var editor = $('#rte').ckeditor
+            (
+                {  
+                    width: '100%', height: '300px',
+                    filebrowserBrowseUrl : '/Areas/Admin/ckfinder/ckfinder.html',
+                    filebrowserUploadUrl: '/Areas/Admin/ckfinder/ckfinder.html'
+                }
+            );
+
+
+            CKFinder.setupCKEditor(editor);
+
+        });
+    </script>
+}

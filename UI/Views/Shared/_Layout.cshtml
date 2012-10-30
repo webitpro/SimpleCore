@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<!--[if IEMobile 7]><html class="iem7"><![endif]-->
+<!--[if lte IE 6]><html class="lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if (IE 7)&(!IEMobile)]><html class="lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="lt-ie9"><![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)]><!--><html><!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta name="MobileOptimized" content="width">
+	<meta name="HandheldFriendly" content="true">
+	<meta name="viewport" content="width=device-width">
+	<meta http-equiv="cleartype" content="on">
+	<meta name="title" content="">
+	<meta name="description" content="">
+	<link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/>
+
+    <!-- seo meta -->
+    @RenderSection("MetaTags", false)
+  
+  <title>@ViewBag.Title</title>
+  <link rel="stylesheet" href="@Reference.Url(Reference.Directory.css, "normalize.css", "")" media="all" />
+  <link rel="stylesheet" href="@Reference.Url(Reference.Directory.css, "responsive-sidebars.css", "layouts")" media="all" />
+  <link rel="stylesheet" href="@Reference.Url(Reference.Directory.css, "style.css", "")" media="all" />
+
+  <!-- Theme -->
+  <link rel="stylesheet" href="@Reference.Url(Reference.Directory.css, "default.css", "themes")" media="all" />
+  
+  <!--[if lt IE 9]>
+  <!-- IF RESPONSIVE -->
+  <script type="text/javascript" src="@Reference.Url(Reference.Directory.js, "html5-respond.js", "lib/tools/html5/")"></script>
+  <!-- IF NOT RESPONSIVE -->
+  <!--
+	<script type="text/javascript" src="@Reference.Url(Reference.Directory.js, "html5.js", "lib/tools/html5/")"></script>
+  -->
+  <![endif]-->
+
+  @Html.Scripts().Styles.Render()
+
+  <!-- load JavaScript -->
+  <script type="text/javascript" src="@Core.Resources.Reference.Url(Core.Resources.Reference.Directory.js, "jquery.min.js", "jquery")"></script>
+  <script type="text/javascript" src="@Core.Resources.Reference.Url(Core.Resources.Reference.Directory.js, "Loader.min.js", "lib")"></script>
+  <script type="text/javascript" src="@Core.Resources.Reference.Url(Core.Resources.Reference.Directory.js, "Library.min.js", "lib")"></script>
+
+  <script type="text/javascript">
+    //SET CACHING
+    Loader.Cache(60);
+
+    //check if mobile environment
+    Loader.Mobile(function () {
+      if (isMobile.any()) {
+        //LOAD MOBILE STYLE SHEETS / JAVASCRIPT / IMAGES
+        var arr = ['footerLogo.png', 'navBg.jpg', 'patterBg.jpg'];
+        Loader.Images(arr, '@Reference.Url(Reference.Directory.images, "", "")');
+      } else {
+        //LOAD REGULAR IMAGES
+        var arr = ['footerLogo.png', 'navBg.jpg', 'patternBg.jpg'];
+        Loader.Images(arr, '@Reference.Url(Reference.Directory.images, "", "")');
+       }
+    });   
+    </script>
+
+    @Html.Scripts().JavaScripts.Render()
+    @RenderSection("HeadScripts", required: false)
+</head>
+
+<body class="no-sidebars">
+<!-- 
+Change body class if sidebars are present
+<body class="one-sidebar sidebar-first">
+<body class="one-sidebar sidebar-second">
+<body class="two-sidebars">
+-->
+
+<header id="header" role="banner">
+  <div class="header-inner inner">
+
+    <p id="skip-link">
+      <a href="#content" class="element-invisible element-focusable">Skip to content</a>
+	  </p>
+
+    <h1 id="site-name">
+      Welcome to SimpleCore<span class="small">&reg;</span>
+    </h1>
+
+  </div><!-- /.header-inner -->
+
+</header><!-- /#header -->
+
+<div id="navigation">
+  <div class="navigation-inner inner">
+    @Html.Partial("~/Views/Shared/_Navigation.cshtml")
+	</div><!-- /.navigation-inner -->
+</div><!-- /#navigation -->
+
+<div id="page">
+
+	<div id="main">
+
+		<div id="content" class="column" role="main">
+			<a id="main-content"></a>
+      @RenderBody()
+		</div><!-- /#content -->
+
+		<aside class="sidebars">
+			<section class="region-sidebar-first column sidebar"></section><!-- /.sidebar-first -->
+			<section class="region-sidebar-second column sidebar"></section><!-- /.sidebar-second -->
+		</aside><!-- /.sidebars -->
+
+	</div><!-- /#main -->
+
+	<footer id="footer">
+    <div class="footer-inner inner clearfix">
+
+      <div class="column-first column">
+        &copy; 2012 Magner Sanborn. All Rights Reserved.
+      </div>
+
+      <div class="column-last column">
+        <img src="@Reference.Url(Reference.Directory.images, "footerLogo.png", "admin")" alt="Magner Sanborn" title="Magner Sanborn" />
+      </div>
+
+    </div><!-- /.footer-inner -->
+	</footer><!-- /#footer -->
+
+</div><!-- /#page -->
+
+@RenderSection("BodyScripts", required: false)
+
+<div id="ajaxProcessing">
+  <images src="@Reference.Url(Reference.Directory.images, "ajax-loader.gif", "admin")" alt="Processing" title="Processing" />
+</div> 
+
+</body>
+</html>

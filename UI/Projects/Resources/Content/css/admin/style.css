@@ -1,0 +1,509 @@
+/* for iPhone, iPod Touch and iPad */
+/* this is a CSS answer to fix the hover/focus '~' and hover/focus '+' problem in safari and chrome */
+#navigation ul ul {
+  display: none;
+}
+
+#navigation ul li:hover > ul {
+  display: block;
+}
+
+#navigation ul li.expanded:hover ~ li.close {
+  display: block;
+}
+
+* {
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 12px;
+  outline: none;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: white;
+}
+
+a {
+  color: #c42023;
+  text-decoration: none;
+}
+a:hover {
+  color: #e31c22;
+}
+
+a img {
+  border: none;
+}
+
+a.button {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  color: white;
+}
+
+p {
+  color: #515151;
+}
+
+h2 {
+  color: #515151;
+  font-size: 16px;
+  padding: 6px 0px 0px 15px;
+  height: 23px;
+  background-color: #bdbdbd;
+  border-bottom: 1px solid #f2f2f2;
+  margin-top: 0px;
+}
+
+h3 {
+  color: #515151;
+  font-size: 14px;
+}
+
+#content #header {
+  height: 85px;
+  width: 100%;
+  margin: auto;
+  background-color: #c42023;
+}
+#content #header #topBar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 30px;
+  background: #c42023;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e31c22), color-stop(100%, #c42023));
+  background-image: -webkit-linear-gradient(#e31c22, #c42023);
+  background-image: -moz-linear-gradient(#e31c22, #c42023);
+  background-image: -o-linear-gradient(#e31c22, #c42023);
+  background-image: linear-gradient(#e31c22, #c42023);
+}
+#content #header #topBar #topBarContent {
+  color: #f2f2f2;
+  padding: 0px 5px 0px 5px;
+  width: 1280px;
+  margin: auto;
+  padding-top: 3px;
+  text-align: right;
+  font-size: 11px;
+  font-weight: bold;
+}
+#content #header #topBar #topBarContent a, #content #header #topBar #topBarContent span {
+  padding: 0px 5px 0px 5px;
+  color: #f2f2f2;
+  font-size: 11px;
+  font-weight: bold;
+}
+#content #header #topBar #topBarContent a {
+  color: #f2f2f2;
+}
+#content #header #topBar #topBarContent a:hover {
+  color: #333333;
+}
+#content #header #headerContent {
+  width: 1280px;
+  margin: auto;
+}
+#content #header #headerContent span {
+  font-size: 24px;
+  color: #f2f2f2;
+  margin-top: 35px;
+  display: inline-block;
+}
+#content #nav {
+  height: 32px;
+  background: url(/Projects/Resources/Content/images/admin/navBg.jpg) top left repeat-x;
+}
+#content #nav #navContent {
+  width: 1280px;
+  margin: auto;
+  position: relative;
+}
+#content #nav #navContent .navButton {
+  display: inline-block;
+  height: 21px;
+  padding: 9px 15px 0px 15px;
+  border: none;
+  border-left: 1px solid transparent;
+  color: #c42023;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+  float: left;
+}
+#content #nav #navContent .navButton:hover {
+  background: #e31c22;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c42023), color-stop(100%, #e31c22));
+  background-image: -webkit-linear-gradient(#c42023, #e31c22);
+  background-image: -moz-linear-gradient(#c42023, #e31c22);
+  background-image: -o-linear-gradient(#c42023, #e31c22);
+  background-image: linear-gradient(#c42023, #e31c22);
+  color: #f2f2f2;
+}
+#content #nav #navContent .navButton.selected {
+  position: relative;
+  top: 0px;
+  height: 21px;
+  padding-top: 8px;
+  color: #f2f2f2;
+  border: 1px solid #c42023;
+  border-bottom: none;
+  background: #e31c22;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c42023), color-stop(100%, #e31c22));
+  background-image: -webkit-linear-gradient(#c42023, #e31c22);
+  background-image: -moz-linear-gradient(#c42023, #e31c22);
+  background-image: -o-linear-gradient(#c42023, #e31c22);
+  background-image: linear-gradient(#c42023, #e31c22);
+}
+#content #pageContainer {
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+  margin: auto;
+  background: url(/Projects/Resources/Content/images/admin/patternBg.jpg) top left repeat-x;
+}
+#content #pageContainer #pg {
+  margin: auto;
+  width: 1280px;
+  padding: 2px;
+}
+#content #pageContainer #pg .smallForm {
+  width: 300px;
+}
+#content #pageContainer #pg .actionBox {
+  border: solid 1px #bdbdbd;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  margin: auto;
+  margin-top: 20px;
+  display: block;
+}
+#content #pageContainer #pg .actionBox.smallForm {
+  display: block;
+}
+#content #pageContainer #pg .actionBox h2 {
+  padding-left: 15px;
+}
+#content #pageContainer #pg .actionBox .actionHeader {
+  padding-top: 6px;
+  padding-left: 15px;
+  height: 23px;
+  background-color: #bdbdbd;
+  border-bottom: 1px solid #bdbdbd;
+}
+#content #pageContainer #pg .actionBox .actionHeader h3 {
+  color: #c42023;
+  margin: 0;
+}
+#content #pageContainer #pg .actionBox .actionContent {
+  padding: 15px;
+}
+#content #pageContainer #pg .actionBox .actionContent h4 {
+  text-transform: uppercase;
+  color: #c42023;
+  font-size: 12px;
+  margin: 0;
+  margin-bottom: 6px;
+}
+#content #pageContainer #pg .actionBox .actionContent h4 span {
+  font-size: 10px;
+  font-weight: normal;
+  text-transform: none;
+}
+#content #pageContainer #pg .actionBox .actionContent .subnav {
+  height: 19px;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  padding: 2px 0px;
+  margin: 0px;
+}
+#content #pageContainer #pg .actionBox .actionContent .subnav .navButton {
+  display: inline-block;
+  height: 15px;
+  padding: 2px 7px 4px 7px;
+  margin-right: 5px;
+  border: 2px solid transparent;
+  color: #333333;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 11px;
+  float: left;
+}
+#content #pageContainer #pg .actionBox .actionContent .subnav .navButton:hover {
+  border-bottom: solid 2px #c42023;
+}
+#content #pageContainer #pg .actionBox .actionContent .subnav .navButton.selected {
+  position: relative;
+  top: 0px;
+  height: 15px;
+  border-bottom: 2px solid #e31c22;
+}
+#content #pageContainer #pg .actionBox input[type=text], #content #pageContainer #pg .actionBox input[type=password] {
+  display: block;
+  width: 250px;
+  height: 22px;
+  line-height: 22px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #515151;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+#content #pageContainer #pg .actionBox select {
+  display: block;
+  width: 265px;
+  height: auto;
+  line-height: 22px;
+  padding-left: 5px;
+  padding-right: 0px;
+  color: #515151;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+#content #pageContainer #pg .actionBox textarea {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #515151;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#footer {
+  width: 100%;
+  height: 40px;
+  color: #c42023;
+}
+#footer #footerContent {
+  width: 1280px;
+  margin: auto;
+  text-align: right;
+  height: 40px;
+}
+#footer #footerContent div {
+  float: left;
+}
+#footer #footerContent div.poweredBy {
+  text-align: center;
+  height: 26px;
+  position: relative;
+  float: right;
+}
+#footer #footerContent div.poweredBy div {
+  position: absolute;
+  top: 0px;
+  left: -110px;
+}
+#footer #footerContent div.poweredBy div img {
+  position: absolute;
+  top: 12px;
+  left: 0px;
+  padding-left: 10px;
+}
+#footer #footerContent div.copyrights {
+  padding-top: 28px;
+}
+
+/* CLASSES */
+.buttonContainer {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.button {
+  padding: 20px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  color: white;
+  background: #e31c22;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c42023), color-stop(100%, #e31c22));
+  background-image: -webkit-linear-gradient(#c42023, #e31c22);
+  background-image: -moz-linear-gradient(#c42023, #e31c22);
+  background-image: -o-linear-gradient(#c42023, #e31c22);
+  background-image: linear-gradient(#c42023, #e31c22);
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-decoration: none;
+  border: 1px solid #f2f2f2;
+  cursor: pointer;
+}
+.button:hover {
+  background: #a51c24;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c42023), color-stop(100%, #a51c24));
+  background-image: -webkit-linear-gradient(#c42023, #a51c24);
+  background-image: -moz-linear-gradient(#c42023, #a51c24);
+  background-image: -o-linear-gradient(#c42023, #a51c24);
+  background-image: linear-gradient(#c42023, #a51c24);
+}
+.button:active {
+  background: #c42023;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c42023), color-stop(100%, #c42023));
+  background-image: -webkit-linear-gradient(#c42023, #c42023);
+  background-image: -moz-linear-gradient(#c42023, #c42023);
+  background-image: -o-linear-gradient(#c42023, #c42023);
+  background-image: linear-gradient(#c42023, #c42023);
+}
+.button.small {
+  padding: 3px 10px 3px 10px;
+}
+
+.dataGrid {
+  width: 100%;
+  height: auto;
+}
+.dataGrid .headerRow {
+  background-color: #bdbdbd;
+}
+.dataGrid th {
+  color: #515151;
+  text-transform: uppercase;
+  text-align: left;
+  border: solid 1px #919191;
+  padding: 5px;
+}
+.dataGrid td {
+  color: #515151;
+  text-indent: 2px;
+}
+
+.grid {
+  width: 100%;
+  height: auto;
+}
+.grid .grid-item {
+  border: solid 1px #bdbdbd;
+  width: auto;
+  display: inline-block;
+  margin: 0px 10px 10px 0px;
+}
+.grid .grid-item .title {
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 5px;
+  background: #bdbdbd;
+  text-indent: 10px;
+  padding: 2px;
+}
+.grid .grid-item .thumb {
+  padding: 10px;
+}
+.grid .grid-item .action {
+  text-align: right;
+  padding: 0px 10px 5px 0px;
+}
+
+.error {
+  color: #990000;
+  font-size: 11px;
+}
+
+span.error {
+  position: relative;
+  left: 280px;
+  top: -30px;
+}
+
+.pager {
+  margin-top: 20px;
+  text-align: right;
+}
+.pager span.element {
+  font-size: 12px;
+  color: #515151;
+}
+.pager span.selectedElement {
+  font-size: 12px;
+  font-weight: bold;
+  color: #515151;
+  border: solid 1px #c42023;
+  padding: 2px;
+}
+.pager a.element {
+  text-decoration: none;
+}
+.pager a.element:hover {
+  text-decoration: none;
+}
+
+span.divider {
+  font-size: 12px;
+  color: #bdbdbd;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+.sort-window {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 101;
+  min-width: 300px;
+  width: auto;
+  min-height: 200px;
+  height: auto;
+  display: none;
+  background: white;
+  border: solid 2px #919191;
+  box-shadow: 3px 3px 4px 6px #919191;
+  -webkit-box-shadow: 3px 3px 4px 6px #919191;
+  -moz-box-shadow: 3px 3px 4px 6px #919191;
+}
+.sort-window div.header {
+  height: 32px;
+  background: url(/Projects/Resources/Content/images/admin/navBg.jpg) top left repeat-x;
+  text-align: left;
+  text-indent: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 4px;
+  color: #515151;
+}
+.sort-window div.body {
+  padding: 10px;
+}
+.sort-window div.body div {
+  float: left;
+}
+.sort-window div.body div.select-buttons {
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 50px;
+  height: 50px;
+  margin: auto;
+}
+.sort-window div.body div.select-buttons div {
+  clear: both;
+  float: left;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+.sort-window div.body div.select-buttons div.up {
+  width: 20px;
+  height: 20px;
+  background: url(/Projects/Resources/Content/images/admin/arrowUp.png) top left no-repeat;
+}
+.sort-window div.body div.select-buttons div.up:hover {
+  background: url(/Projects/Resources/Content/images/admin/arrowUp_over.png);
+}
+.sort-window div.body div.select-buttons div.down {
+  width: 20px;
+  height: 20px;
+  background: url(/Projects/Resources/Content/images/admin/arrowDown.png) top left no-repeat;
+}
+.sort-window div.body div.select-buttons div.down:hover {
+  background: url(/Projects/Resources/Content/images/admin/arrowDown_over.png);
+}
+.sort-window div.body div.button-container {
+  clear: both;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}

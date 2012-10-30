@@ -1,0 +1,11 @@
+﻿@model Core.Models.Page
+@{ var pg = Model; }
+
+<h1 class="title" id="page-title">@pg.Title</h1>
+<article class="page-custom">
+  @{   
+    CustomPage page = Engine.Template.CustomPage.Retrieve(pg.Id);
+    ViewBag.Title = pg.Title;
+    Html.RenderAction(page.Action, page.Controller);
+  }
+</article>

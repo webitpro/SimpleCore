@@ -1,0 +1,225 @@
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+* html .clearfix {
+  zoom: 1;
+}
+
+/* IE6 */
+*:first-child + html .clearfix {
+  zoom: 1;
+}
+
+/* IE7 */
+/* for iPhone, iPod Touch and iPad */
+/* this is a CSS answer to fix the hover/focus '~' and hover/focus '+' problem in safari and chrome */
+#navigation ul ul {
+  display: none;
+}
+
+#navigation ul li:hover > ul {
+  display: block;
+}
+
+#navigation ul li.expanded:hover ~ li.close {
+  display: block;
+}
+
+/**
+ * Hide elements from all users.
+ *
+ * Used for elements which should not be immediately displayed to any user. An
+ * example would be a collapsible fieldset that will be expanded with a click
+ * from a user. The effect of this class can be toggled with the jQuery show()
+ * and hide() functions.
+ */
+.element-hidden {
+  display: none;
+}
+
+/**
+ * Hide elements visually, but keep them available for screen-readers.
+ *
+ * Used for information required for screen-reader users to understand and use
+ * the site where visual display is undesirable. Information provided in this
+ * manner should be kept concise, to avoid unnecessary burden on the user.
+ * "!important" is used to prevent unintentional overrides.
+ */
+.element-invisible {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+/**
+ * The .element-focusable class extends the .element-invisible class to allow
+ * the element to be focusable when navigated to via the keyboard.
+ */
+.element-invisible.element-focusable:active,
+.element-invisible.element-focusable:focus {
+  position: static !important;
+  clip: auto;
+}
+
+html {
+  color: #515151;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+a:link,
+a:visited {
+  color: #c42023;
+}
+
+#header {
+  background: #c42023;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e11c22), color-stop(100%, #c42023));
+  background-image: -webkit-linear-gradient(#e11c22, #c42023);
+  background-image: -moz-linear-gradient(#e11c22, #c42023);
+  background-image: -o-linear-gradient(#e11c22, #c42023);
+  background-image: linear-gradient(#e11c22, #c42023);
+}
+#header .inner {
+  padding: 10px;
+}
+
+h1#site-name {
+  color: #fff;
+  font-weight: normal;
+}
+h1#site-name .small {
+  font-size: 50%;
+  vertical-align: super;
+}
+
+#navigation {
+  background: #f8f8f8;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fafafa), color-stop(100%, #eaeaea));
+  background-image: -webkit-linear-gradient(#fafafa, #eaeaea);
+  background-image: -moz-linear-gradient(#fafafa, #eaeaea);
+  background-image: -o-linear-gradient(#fafafa, #eaeaea);
+  background-image: linear-gradient(#fafafa, #eaeaea);
+  border-bottom: 1px solid #CACACA;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 0 3px 1px inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 0 3px 1px inset;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0 3px 1px inset;
+  font-size: 12px;
+}
+#navigation .navigation-inner {
+  border-bottom: 1px solid #fff;
+}
+#navigation ul.menu {
+  /* Menu block links */
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  /* LTR */
+  text-transform: uppercase;
+}
+#navigation ul.menu li {
+  /* A simple method to get navigation links to appear in one line. */
+  float: left;
+  /* LTR */
+  padding: 0;
+  /* LTR */
+  list-style-type: none;
+  list-style-image: none;
+}
+#navigation ul.menu li:hover {
+  background: #c42023;
+}
+#navigation ul.menu li a:link,
+#navigation ul.menu li a:visited {
+  color: #c42023;
+  display: block;
+  padding: 10px 15px 9px 15px;
+  text-decoration: none;
+}
+#navigation ul.menu li a:link:hover, #navigation ul.menu li a:link:focus, #navigation ul.menu li a:link.active,
+#navigation ul.menu li a:visited:hover,
+#navigation ul.menu li a:visited:focus,
+#navigation ul.menu li a:visited.active {
+  background: #c42023;
+  color: #fff;
+}
+#navigation ul.menu li ul {
+  left: -999em;
+  position: absolute;
+  text-transform: none;
+}
+#navigation ul.menu li:hover ul {
+  display: block;
+  left: auto;
+  margin: 0;
+  width: 200px;
+}
+#navigation ul.menu li:hover ul li {
+  float: none;
+}
+#navigation ul.menu li:hover ul li a:link,
+#navigation ul.menu li:hover ul li a:visited {
+  color: #ddd;
+}
+#navigation ul.menu li:hover ul li a:link:hover, #navigation ul.menu li:hover ul li a:link:focus,
+#navigation ul.menu li:hover ul li a:visited:hover,
+#navigation ul.menu li:hover ul li a:visited:focus {
+  color: #fff;
+}
+#navigation ul.menu li:hover ul li:hover ul {
+  display: block;
+  left: auto;
+  margin-left: 200px;
+  top: 0;
+  width: 200px;
+}
+#navigation ul.menu li:hover ul ul {
+  left: -999em;
+  position: absolute;
+}
+#navigation ul.menu li.last:hover ul {
+  right: 0;
+}
+#navigation ul.menu li.expanded:hover > a:link, #navigation ul.menu li.expanded:hover > a:visited {
+  color: #fff;
+}
+#navigation ul.menu li:hover ul a:link, #navigation ul.menu li:hover ul a:visited, #navigation ul.menu li.expanded a:hover, #navigation ul.menu li.expanded a:focus {
+  color: #fff;
+  display: block;
+}
+#navigation ul.menu li.expanded ul a:link, #navigation ul.menu li.expanded ul a:visited {
+  background: #c42023;
+  color: #fff;
+  display: block;
+  padding: 7px 15px 8px 15px;
+}
+#navigation ul.menu li.expanded li:hover > a:link, #navigation ul.menu li.expanded li:hover > a:visited, #navigation ul.menu li.expanded ul ul a:link, #navigation ul.menu li.expanded ul ul a:visited {
+  background: #a71b1e;
+}
+#navigation ul.menu li.expanded ul a.active {
+  text-decoration: underline;
+}
+
+#footer {
+  border-top: 1px solid #ccc;
+  color: #c42023;
+  font-size: 12px;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+#footer .column-first {
+  float: left;
+}
+#footer .column-last {
+  display: block;
+  float: right;
+  text-align: right;
+  width: 175px;
+}

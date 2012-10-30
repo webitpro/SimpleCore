@@ -1,0 +1,48 @@
+﻿@model CustomPage
+@{
+    ViewBag.Title = "Body";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var pageId = 0;
+    if(ViewData["PageId"] != null)
+    {
+        pageId = Convert.ToInt32(ViewData["PageId"]);
+    }
+    
+}
+
+<div class="actionBox">
+    <h2>Custom Page</h2>
+    <div class="actionContent">
+    <h3>Page: </h3>
+        <p class="headerOptions">
+             @Html.ActionLink("<< Pages", "Index", new{controller = "Page", action = "Index"})        
+        </p>
+        @if(!ViewData.ModelState.IsValid)
+        {
+            <p class="error">@Html.ValidationSummary(true)</p>
+        }
+        
+        @using (Html.BeginForm("Index", "CustomPage", new { controller = "CustomPage", action = "Index", pageId = @pageId }, FormMethod.Post))
+        {            
+            @Html.Hidden("pageId", pageId);
+                                          
+            <h4>Controller:</h4>
+            @Html.TextBoxFor(m=>m.Controller)
+            <span class="error">@Html.ValidationMessageFor(m=>m.Controller)</span>
+            
+            <h4>Action:</h4>
+            @Html.TextBoxFor(m=>m.Action)
+            <span class="error">@Html.ValidationMessageFor(m=>m.Action)</span>
+            
+            <div class="buttonContainer">
+                <input type="submit" value="Save" class="button" />
+                <input type="button" value="Cancel" class="button" onclick="window.location='@Url.Action("Index", "Page", new { controller = "Page" })';" />
+            </div>
+        }
+      
+     </div>
+</div>
+@section HeadScripts
+{    
+    
+}

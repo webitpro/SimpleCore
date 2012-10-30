@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{38087C63-D5BA-4450-90F8-66F63DFE7EE1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Resources</RootNamespace>
+    <AssemblyName>Resources</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DynamicData.EFCodeFirstProvider, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\DynamicData.EFCodeFirstProvider.0.4.1.0\lib\net40\DynamicData.EFCodeFirstProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Reference.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\.sass-cache\" />
+    <Folder Include="Content\data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Content\config.rb" />
+    <None Include="Content\sass\admin\style.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <Minify>True</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </None>
+    <None Include="Content\sass\admin\themes\_default.scss">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </None>
+    <None Include="Content\sass\admin\_adminbase.scss" />
+    <None Include="Content\sass\admin\_admincustom.scss" />
+    <None Include="Content\sass\layouts\fixed-width.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </None>
+    <None Include="Content\sass\layouts\responsive-sidebars.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>True</DebugInfo>
+    </None>
+    <None Include="Content\sass\normalize.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </None>
+    <None Include="Content\sass\print.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </None>
+    <None Include="Content\sass\style.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </None>
+    <None Include="Content\sass\templates\accordion.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </None>
+    <None Include="Content\sass\templates\custom_page.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </None>
+    <None Include="Content\sass\templates\static_page.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </None>
+    <None Include="Content\sass\themes\default.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </None>
+    <None Include="Content\sass\_base.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </None>
+    <None Include="Content\sass\_custom.scss">
+      <Compile>False</Compile>
+      <Minify>False</Minify>
+      <CompileStyle>Nested</CompileStyle>
+      <DebugInfo>False</DebugInfo>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\admin\style.css" />
+    <Content Include="Content\css\layouts\fixed-width.css" />
+    <Content Include="Content\css\layouts\responsive-sidebars.css" />
+    <Content Include="Content\css\normalize.css" />
+    <Content Include="Content\css\print.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\templates\accordion.css" />
+    <Content Include="Content\css\templates\custom_page.css" />
+    <Content Include="Content\css\templates\static_page.css" />
+    <Content Include="Content\css\themes\default.css" />
+    <Content Include="Content\images\admin\ajax-loader.gif" />
+    <Content Include="Content\images\admin\arrowDown.png" />
+    <Content Include="Content\images\admin\arrowDown_over.png" />
+    <Content Include="Content\images\admin\arrowUp.png" />
+    <Content Include="Content\images\admin\arrowUp_over.png" />
+    <Content Include="Content\images\admin\footerLogo.png" />
+    <Content Include="Content\images\admin\navBg.jpg" />
+    <Content Include="Content\images\admin\patternBg.jpg" />
+    <Content Include="Content\js\lib\engine\NavEngine.js" />
+    <Content Include="Content\js\lib\engine\NavEngine.min.js">
+      <DependentUpon>NavEngine.js</DependentUpon>
+    </Content>
+    <Content Include="Content\js\lib\engine\Page.min.js">
+      <DependentUpon>Page.js</DependentUpon>
+    </Content>
+    <Content Include="Content\js\lib\engine\Sort.min.js">
+      <DependentUpon>Sort.js</DependentUpon>
+    </Content>
+    <Content Include="Content\js\lib\Library.min.js">
+      <DependentUpon>Library.js</DependentUpon>
+    </Content>
+    <Content Include="Content\js\lib\tools\ajaxupload\jquery.blockUI.min.js">
+      <DependentUpon>jquery.blockUI.js</DependentUpon>
+    </Content>
+    <Content Include="Content\js\lib\tools\ajaxupload\jquery.form.min.js">
+      <DependentUpon>jquery.form.js</DependentUpon>
+    </Content>
+    <Content Include="Content\js\lib\MobileDetect.min.js">
+      <DependentUpon>MobileDetect.js</DependentUpon>
+    </Content>
+    <Content Include="Content\js\lib\Ajax.js" />
+    <Content Include="Content\js\lib\Ajax.min.js">
+      <DependentUpon>Ajax.js</DependentUpon>
+    </Content>
+    <Content Include="Content\js\lib\Library.js" />
+    <Content Include="Content\js\jquery\ui-style\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\js\jquery\ui-style\css\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\js\jquery\ui-style\css\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\js\jquery\ui-style\css\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\js\jquery\ui-style\css\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\js\jquery\ui-style\css\images\ui-bg_glass_75_ffffff_1x400.png" />
+    <Content Include="Content\js\jquery\ui-style\css\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\js\jquery\ui-style\css\images\ui-bg_inset-soft_95_fef1ec_1x100.png" />
+    <Content Include="Content\js\jquery\ui-style\css\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\js\jquery\ui-style\css\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\js\jquery\ui-style\css\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\js\jquery\ui-style\css\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\js\jquery\ui-style\css\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\js\jquery\ui-style\css\jquery.ui.custom.css" />
+    <Content Include="Content\js\jquery\ui-style\js\jquery.ui.custom.min.js" />
+    <Content Include="Content\js\lib\tools\ajaxupload\jquery.blockUI.js" />
+    <Content Include="Content\js\lib\tools\ajaxupload\jquery.form.js" />
+    <Content Include="Content\js\lib\tools\html5\html.js" />
+    <Content Include="Content\js\lib\tools\html5\html.min.js" />
+    <Content Include="Content\js\lib\tools\html5\html5-respond.js" />
+    <Content Include="Content\js\lib\tools\html5\html5-respond.min.js" />
+    <Content Include="Content\js\lib\tools\nailthumb\jquery.imgpreload.js" />
+    <Content Include="Content\js\lib\tools\nailthumb\jquery.imgpreload.min.js">
+      <DependentUpon>jquery.imgpreload.js</DependentUpon>
+    </Content>
+    <Content Include="Content\js\lib\tools\nailthumb\jquery.nailthumb.js" />
+    <Content Include="Content\js\lib\Loader.js" />
+    <Content Include="Content\js\jquery\jquery.min.js" />
+    <Content Include="Content\js\lib\Loader.min.js">
+      <DependentUpon>Loader.js</DependentUpon>
+    </Content>
+    <Content Include="Content\js\lib\MobileDetect.js" />
+    <Content Include="Content\js\lib\Tooltip.js" />
+    <Content Include="Content\js\lib\Tooltip.min.js">
+      <DependentUpon>Tooltip.js</DependentUpon>
+    </Content>
+    <Content Include="Content\js\lib\Utils.js" />
+    <Content Include="Content\js\lib\Utils.min.js">
+      <DependentUpon>Utils.js</DependentUpon>
+    </Content>
+    <Content Include="Content\js\lib\engine\Page.js" />
+    <Content Include="Content\js\lib\engine\Sort.js" />
+    <Content Include="Content\js\lib\tools\nailthumb\jquery.nailthumb.min.js">
+      <DependentUpon>jquery.nailthumb.js</DependentUpon>
+    </Content>
+    <Content Include="Content\xml\countries.xml" />
+    <Content Include="Content\xml\states.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
