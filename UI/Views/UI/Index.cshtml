@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var t = ViewContext.RouteData.Values["t"].ToString();
+    var s = ViewContext.RouteData.Values["s"].ToString();
+    var p = ViewContext.RouteData.Values["p"].ToString();
+
+    //get pageId
+    Core.Models.Page pg = Engine.Page.Retrieve(t, s, p);
+    var tmpl = "";
+    if(pg != null)
+    {
+        tmpl = pg.Template;
+        ViewBag.Title = pg.Title;
+    }
+}
+
+@section HeadScripts
+{
+
+}
+
+
+@{
+    if (!string.IsNullOrEmpty(tmpl))
+    {
+        Html.Scripts().Styles.Add(Engine.Template.CSS.Path(tmpl));
+            
+        switch ((Engine.Template.Id)Enum.Parse(typeof(Engine.Template.Id), tmpl))
+        {
+            case Engine.Template.Id.Static_Page:
+                Html.RenderPartial("~/Views/Templates/_StaticPage.cshtml", pg);
+                 Meta.Set(tmpl, pg);        
+            break;
+            case Engine.Template.Id.Custom_Page:
+                Html.RenderPartial("~/Views/Templates/_CustomPage.cshtml", pg);
+                Meta.Set(tmpl,pg);
+                break;
+            case Engine.Template.Id.Accordion:
+                Html.RenderPartial("~/Views/Templates/_Accordion.cshtml", pg);
+                break;               
+                                
+        }
+    }
+    else
+    {
+        //load error
+        Html.RenderPartial("~/Views/Shared/Error.cshtml");
+    }    
+    
+}
+
+@section MetaTags
+{
+    <meta name="title" content="@Meta.Title" />
+    <meta name="description" content="@Meta.Description" />
+}

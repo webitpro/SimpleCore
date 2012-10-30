@@ -1,0 +1,523 @@
+﻿@import "adminbase";
+
+
+* { font-family: $trebuchet; font-size: 12px; outline: none; }
+html, body { margin: 0; padding: 0; }
+body { background-color: $main-background-color; }
+a 
+{ 
+    color: $main-color; 
+    text-decoration: none; 
+    
+    &:hover { color: $light-color; }
+}
+a img { border: none; }
+a.button
+{
+    padding-top: 7px;
+    padding-bottom: 7px;
+    color: $white;
+}
+p { color: $font-color; }
+h2 
+{ 
+    color: $font-color; 
+    font-size: 16px;  
+    padding: 6px 0px 0px 15px; 
+    height: 23px;   
+    background-color: $subheader-background-color; 
+    border-bottom: 1px solid $off-white; 
+    margin-top: 0px;
+}
+
+h3 
+{ 
+    color: $font-color; 
+    font-size: 14px; 
+}
+
+
+
+#content
+{
+    #header
+    {
+        height: 85px;
+        width: 100%;
+        margin: auto;
+        background-color: $main-color;
+
+        #topBar 
+        {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 30px;
+
+
+
+
+  background: $main-color;
+  @include background-image(linear-gradient($light-color, $main-color));
+
+
+
+
+            #topBarContent
+            {
+                color: $off-white;
+				padding: 0px 5px 0px 5px;
+
+                width: $content-width;
+                margin: auto;
+                padding-top: 3px;
+                text-align: right;
+                
+                font-size: 11px;
+                font-weight: bold;
+                
+                a,span
+				{ 
+					padding: 0px 5px 0px 5px;
+					color: $off-white;
+					font-size: 11px;
+					font-weight: bold;
+				} 
+                a
+                {
+                    color: $off-white;
+
+                    &:hover
+                    {
+                        color: $dark-neutral-color;
+                    }
+                }
+ 
+            }
+        }
+
+        #headerContent
+        {
+            width: $content-width;
+            margin: auto;
+
+            span
+            {
+                font-size: 24px;
+                color: $off-white;
+                margin-top: 35px;
+                display: inline-block;
+            }
+        }
+    }
+
+    #nav
+    {
+        height: 32px;
+        background: url(/Projects/Resources/Content/images/admin/navBg.jpg) top left repeat-x;
+        
+        #navContent
+        {
+
+            width: $content-width;
+            margin: auto;
+            position: relative;
+            .navButton
+            {
+                display: inline-block;
+                height: 21px;
+                padding: 9px 15px 0px 15px;
+                border: none;
+                border-left: 1px solid $transparent-color;
+                color: $main-color;
+                text-decoration: none;
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: 12px;
+                float: left;
+
+                &:hover { 
+                
+                
+                
+                
+background: $light-color;
+@include background-image(linear-gradient($main-color, $light-color));
+color: $off-white;
+                
+                
+                 }
+                &.selected
+                {
+                    position: relative;
+                    top: 0px;
+                    height: 21px;
+                    padding-top: 8px;
+                    color: $off-white;
+                    border: 1px solid $main-color;
+                    border-bottom: none;
+
+
+                    background: $light-color;
+@include background-image(linear-gradient($main-color, $light-color));
+
+
+                }
+            }
+        }
+    }
+
+    #pageContainer
+    { 
+        width: 100%;
+        height: auto;
+        min-height: 300px;
+        margin: auto;
+        background: url(/Projects/Resources/Content/images/admin/patternBg.jpg) top left repeat-x;
+
+        #pg
+        {        
+            margin: auto;
+            width: $content-width;
+            padding: 2px;
+
+            .smallForm { width: 300px; }
+
+            .actionBox
+            {
+                border: solid 1px $light-neutral-color;
+                @include border-radius(2px);
+                margin: auto;
+                margin-top: 20px;
+                display: block;
+
+                &.smallForm { display: block; }
+
+                h2
+                {
+                    padding-left: 15px;
+                }
+
+                .actionHeader
+                {
+                    padding-top: 6px;
+                    padding-left: 15px;
+                    height: 23px;
+                    background-color: $action-box-header-background-color;
+                    border-bottom: 1px solid $light-neutral-color;
+
+                    h3
+                    {
+                        color: $action-box-font-color;
+                        margin: 0;
+                    }
+                }
+
+                .actionContent
+                {
+                    padding: 15px;
+                    h4
+                    {
+                        text-transform: uppercase;
+                        color: $action-content-font-color;
+                        font-size: 12px;
+                        margin: 0;
+                        margin-bottom: 6px;
+
+                        span { font-size: 10px; font-weight: normal; text-transform: none; }
+                    }
+
+					.subnav
+					{
+						height: 19px;
+						width: 100%;
+						margin: auto;
+						position: relative; 
+						padding: 2px 0px;
+						margin: 0px;
+						.navButton
+						{
+							display: inline-block;
+							height: 15px;
+							padding: 2px 7px 4px 7px; margin-right: 5px;							
+							border: 2px solid $transparent-color;
+							color: $dark-neutral-color;
+							text-decoration: none;
+							text-transform: uppercase;
+							font-weight: bold;
+							font-size: 11px;
+							float: left;
+
+							&:hover { border-bottom: solid 2px $main-color; }
+							&.selected
+							{
+								position: relative;
+								top: 0px;
+								height: 15px;
+								border-bottom: 2px solid $light-color;
+							}
+						}
+					}
+                }
+
+                input[type=text], input[type=password]
+                {
+                    display: block;
+                    width: 250px;
+                    height: 22px;
+
+                    line-height: 22px;
+
+                    padding-left: 5px;
+                    padding-right: 5px;
+    
+                    color: $font-color;
+                    font-size: 14px;
+    
+                    margin-bottom: 10px;
+                }
+
+                select
+                {
+                    display: block;
+                    width: 265px;
+                    height: auto;
+                    line-height: 22px;
+                    padding-left: 5px;
+                    padding-right: 0px;
+                    color: $font-color;
+                    font-size: 14px;
+                    margin-bottom: 10px;
+                }
+
+				textarea
+				{
+					margin-bottom: 10px;
+					font-size: 14px; color: $font-color;
+					padding-left: 5px; padding-right: 5px;
+				}
+            }
+
+        }
+        
+    }    
+}
+
+#footer
+{
+    width: 100%;
+    height: 40px;
+    color: $main-color;
+    
+    
+    #footerContent
+    {
+        width: $content-width; margin: auto; text-align: right; height: 40px;
+        div 
+        { 
+            float: left;
+            &.poweredBy 
+            { 
+                text-align: center; height: 26px; position: relative; float: right;
+                div 
+                { 
+                    position: absolute; top: 0px; left: -110px;
+                    img { position: absolute; top: 12px; left: 0px; padding-left: 10px; }
+                }
+
+               
+            
+            }
+            &.copyrights { padding-top: 28px;} 
+        }
+        
+    }
+}
+
+
+/* CLASSES */
+.buttonContainer
+{
+    margin-top: 20px;
+    text-align: left;
+}
+
+.button
+{
+    padding: 20px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    color: $white;
+
+
+    
+  background: $light-color;
+  @include background-image(linear-gradient($main-color, $light-color));
+
+
+
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    border: 1px solid$off-white;
+    cursor: pointer;
+    &:hover
+    {
+
+
+
+          background: $dark-color;
+  @include background-image(linear-gradient($main-color, $dark-color));
+
+
+    }
+    &:active
+    {
+
+
+        
+          background: $main-color;
+  @include background-image(linear-gradient($main-color, $main-color));
+
+
+    }
+
+    &.small { padding: 3px 10px 3px 10px; }   
+}
+
+
+.dataGrid
+{
+    width: 100%;
+    height: auto;
+    
+    .headerRow
+    {
+        background-color: $light-neutral-color;
+        
+    }
+
+    th
+    {
+        color: $font-color;
+        text-transform: uppercase;
+        text-align: left;
+        border: solid 1px $neutral-color;
+        padding: 5px;
+    }
+
+    td
+    {
+        color: $font-color;
+        text-indent: 2px;
+    }
+}
+
+.grid
+{
+	width: 100%;
+	height: auto;
+
+	.grid-item
+	{
+		border: solid 1px $light-neutral-color;
+		width: auto;
+		display: inline-block;
+		margin: 0px 10px 10px 0px;
+
+		.title { font-weight: bold; color: $dark-neutral-color; margin-bottom: 5px; background: $light-neutral-color; text-indent: 10px; padding: 2px;}
+		.thumb { padding: 10px;} 
+		.action { text-align: right; padding: 0px 10px 5px 0px;}
+
+
+	}
+}
+
+.error { color: $error-color; font-size: 11px; }
+span.error {  position: relative; left: 280px; top: -30px; }
+
+.pager
+{
+    margin-top: 20px;
+    text-align: right;
+
+    span.element 
+    { 
+        font-size: 12px; 
+        color: $font-color; 
+    }
+    span.selectedElement
+    {
+        font-size: 12px;
+        font-weight: bold;
+        color: $font-color;
+        border: solid 1px $main-color;
+        padding: 2px;        
+    }
+
+    a.element 
+    { 
+        text-decoration: none;
+        
+        &:hover { text-decoration: none; }
+    }
+}
+
+span.divider 
+{ 
+    font-size: 12px; 
+    color: $light-neutral-color; 
+    margin-left: 1px; 
+    margin-right: 1px; 
+}
+
+
+.sort-window 
+{
+	position: absolute; top: 0px; left:0px; z-index: 101; min-width: 300px; width: auto; min-height: 200px; height: auto; display: none;
+	background: $main-background-color;
+	border: solid 2px $neutral-color;
+	@include shadow();
+
+	div.header 
+	{  
+		height: 32px;
+        background: url(/Projects/Resources/Content/images/admin/navBg.jpg) top left repeat-x;
+		text-align: left;
+		text-indent: 10px;
+		font-size: 20px;
+		font-weight: bold;
+		padding-top: 4px;
+		color: $font-color;
+	}
+
+	div.body 
+	{
+		padding: 10px;
+		div 
+		{
+			float: left;
+
+			&.select-buttons
+			{
+				padding-left: 10px; padding-right: 10px; width: 50px; height: 50px; margin: auto;
+
+				div 
+				{ 
+					clear: both; float: left; margin-bottom: 5px; margin-top: 5px; cursor: pointer; 
+
+					&.up { width: 20px; height: 20px; background: url(/Projects/Resources/Content/images/admin/arrowUp.png) top left no-repeat; }
+					&.up:hover { background: url(/Projects/Resources/Content/images/admin/arrowUp_over.png); }
+					&.down { width: 20px; height: 20px; background: url(/Projects/Resources/Content/images/admin/arrowDown.png) top left no-repeat; }
+					&.down:hover { background: url(/Projects/Resources/Content/images/admin/arrowDown_over.png); }
+					
+				}
+			}
+
+			&.button-container { clear: both; margin-bottom: 15px; margin-top: 15px; }
+				
+		}
+	}
+}

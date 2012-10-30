@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Tab>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; 
+}
+
+<div class="actionBox">
+<h2>Navigation - Tabs</h2>
+    <div class="actionContent">
+        <div class="subnav">@Html.Partial("~/areas/admin/views/shared/_NavigationOptions.cshtml")</div>
+        <p class="headerOptions">
+            @Html.ActionLink("Add Tab", "Manage", new { controller = "NavTab" })
+            @if(Model != null && Model.Count() > 0)
+            {
+                <span class="divider">|</span>
+                <a href="#" onclick="Sort.Open(this, 'tabSort', 'Tab Sort');">Sort</a>
+            }
+        </p>
+        @{
+            if(Request.QueryString["eid"] != null)
+            {
+                <p class="error">@TempData[Request.QueryString["eid"].ToString()].ToString()</p>
+            }
+        }
+        <table class="dataGrid" cellspacing="0" cellpadding="5">
+            <tr class="headerRow">
+                <th>Title</th>
+                <th>URL Title</th>
+                <th>Is Hidden?</th>
+                <th>Actions</th>
+            </tr>
+            @foreach (var t in Model)
+            {
+                <tr>
+                    <td>@t.Title</td>
+                    <td>@t.UrlTitle</td>
+                    <td>@((t.IsHidden) ? "Yes" : "No")</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Manage", new { controller = "NavTab", action = "Manage", id = t.Id })
+                        <span class="divider">|</span>
+                        @Form.Element.ActionLink.Delete("Admin", "NavTab", "Delete", t.Id, t.Title, "Tab")
+                        <span class="divider">|</span>
+                        @Html.ActionLink("Sections", "Index", new { controller = "NavSection", action = "Index", id = t.Id })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<div id="tabSort" class="sort-window"> 
+    <div class="header"></div>        
+    <div class="body">
+        <div>
+            @Html.DropDownList("sortTabs", Form.Element.MultiSelect.Navigation.Tabs(null), new { @selectionMode = "Single", @style = "width: 200px;", @size = "5" })
+        </div>
+        <div class="select-buttons">
+            <div class="up" onclick="Sort.Up('sortTabs');"></div>
+            <div class="down" onclick="Sort.Down('sortTabs');"></div>
+        </div>
+        <div class="button-container">
+            <input type="button" class="button" value="Save" onclick="Sort.Save('sortTabs', 'tabSort', 'tab', 0);"/>
+            &nbsp;
+            <input type="button" class="button" value="Cancel" onclick="Sort.Close('tabSort');" />
+        </div>
+    </div>
+ </div>
+
+@section BodyScripts
+{
+    <script type="text/javascript">
+        Lib.Ajax(function()
+        {
+            Load.JS('@Reference.Url(Reference.Directory.js, "Sort.min.js", "lib/engine/")', true, function ()
+            {
+                Load.JS('@Reference.Url(Reference.Directory.js, "Page.min.js", "lib/engine/")', true);
+            });
+        });
+    </script>
+}

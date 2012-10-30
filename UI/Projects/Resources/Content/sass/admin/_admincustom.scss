@@ -1,0 +1,29 @@
+@mixin vertical-linear-gradient($top-color: #666666, $bottom-color: #333333)
+{
+    background: $top-color;
+    background: -moz-linear-gradient(top, $top-color, $bottom-color);
+    background: -webkit-gradient(linear, left top, left bottom, from($top-color), to($bottom-color));
+}
+
+@mixin border-radius($radius: 2px)
+{
+    -moz-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin opacity($value: .5)
+{
+    opacity: $value;
+}
+
+@mixin shadow($top: 3px, $left: 3px, $inset: 4px, $blur: 6px, $color: $neutral-color)
+{
+	box-shadow: $top $left $inset $blur $color;
+	-webkit-box-shadow:  $top $left $inset $blur $color;
+	-moz-box-shadow:  $top $left $inset $blur $color;
+}
+
+@mixin opacity($value: .5)
+{
+	opacity: $value;
+}

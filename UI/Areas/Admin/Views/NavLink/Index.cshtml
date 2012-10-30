@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Link>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var sectionId = 0;
+    if(ViewData["SectionId"] != null)
+    {
+        sectionId = Convert.ToInt32(ViewData["SectionId"]);
+    }
+    
+}
+<div class="actionBox">
+<h2>Navigation - Links</h2>
+    <div class="actionContent">
+        <div class="subnav">@Html.Partial("~/areas/admin/views/shared/_NavigationOptions.cshtml")</div>
+        <p class="headerOptions">
+            @Html.ActionLink("Add Link", "Manage", new { controller = "NavLink", sectionId = sectionId })
+            @if(Model != null && Model.Count() > 0)
+            {
+                <span class="divider">|</span>
+                <a href="#" onclick="Sort.Open(this, 'linkSort', 'Link Sort');">Sort</a>
+            }            
+        </p>
+        @{
+            if(Request.QueryString["eid"] != null)
+            {
+                <p class="error">@TempData[Request.QueryString["eid"].ToString()].ToString()</p>
+            }
+        }
+        <p>@Html.DropDownList("Tabs", Form.Element.DropDown.Navigation.Sections(sectionId))</p>
+        <table class="dataGrid" cellpadding="5" cellspacing="0">
+            <tr class="headerRow">
+                <th>Title</th>
+                <th>URL Title</th>
+                <th>Is Hidden?</th>
+                <th>Actions</th>
+            </tr>
+            @foreach (var l in Model)
+            {
+                <tr>
+                    <td>@l.Title</td>
+                    <td>@l.UrlTitle</td>
+                    <td>@((l.IsHidden) ? "Yes" : "No")</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Manage", new { controller = "NavLink", action = "Manage", id = l.Id, sectionId = sectionId })
+                        <span class="divider">|</span>
+                        @Form.Element.ActionLink.Delete("Admin", "NavLink", "Delete", l.Id, l.Title, "Link" )                       
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<div id="linkSort" class="sort-window"> 
+    <div class="header"></div>        
+    <div class="body">
+        <div>
+            @Html.DropDownList("sortLinks", Form.Element.MultiSelect.Navigation.Links(sectionId,null), new { @selectionMode = "Single", @style = "width: 200px;", @size = "5" })
+        </div>
+        <div class="select-buttons">
+            <div class="up" onclick="Sort.Up('sortLinks');"></div>
+            <div class="down" onclick="Sort.Down('sortLinks');"></div>
+        </div>
+        <div class="button-container">
+            <input type="button" class="button" value="Save" onclick="Sort.Save('sortLinks', 'linkSort', 'link', @sectionId);"/>
+            &nbsp;
+            <input type="button" class="button" value="Cancel" onclick="Sort.Close('linkSort');" />
+        </div>
+    </div>
+ </div>
+
+@section BodyScripts
+{
+    <script type="text/javascript">
+    Lib.Ajax(function()
+    {
+        Load.JS('@Reference.Url(Reference.Directory.js, "Sort.min.js", "lib/engine/")', true, function ()
+        {
+            Load.JS('@Reference.Url(Reference.Directory.js, "Page.min.js", "lib/engine/")', true);
+        });
+    });
+
+    $(document).ready(function ()
+    {
+        $('#Sections').change(function (e)
+        {
+            $('#Sections option:selected').each(function ()
+            {
+                location.href = location.href.substr(0, location.href.length - 1) + $(this).val();
+            });
+        });
+    });
+    </script>
+}

@@ -1,0 +1,87 @@
+﻿@{
+    var t = ViewContext.RouteData.Values["t"].ToString();
+    var s = ViewContext.RouteData.Values["s"].ToString();
+    var p = ViewContext.RouteData.Values["p"].ToString();    
+}
+<nav role="navigation">
+    <ul class="menu clearfix">
+    @{
+        var tabCounter = 1;
+        IRepository<Tab> repo = new DB.Repository<Tab>(new DB.Context());
+        IEnumerable<Tab> tabs = repo.Retrieve(null, m=>m.OrderBy(x=>x.Position), x=>x.Sections);
+        foreach (Tab tab in tabs)
+        {
+            if (!tab.IsHidden)
+            {
+                var selectedTab = ((t.Equals(tab.UrlTitle) || (t.Equals("") && tab.Title.ToLower().Equals("home"))) ? "active" : "leaf");
+                var isLastTab = ((tabCounter == tabs.Count()) ? " last" : "");
+                var isExpanded = ((tab.Sections.Count > 0) ? "expanded" : "leaf");  
+                         
+                <li class="@isExpanded@isLastTab">
+                           
+                    @if (tab.PageId != null)
+                    {
+                        if(tab.Title.ToLower().Equals("home"))
+                        {
+                            <a href="/" class="@selectedTab">@tab.Title</a>
+                        }
+                        else
+                        {
+                            <a href="/@tab.UrlTitle" class="@selectedTab">@tab.Title</a>
+                        }
+                    }
+                    else
+                    {
+                        @tab.Title
+                    }                
+                    @if (tab.Sections.Count > 0)
+                    {
+                        var sectionCounter = 0;                        
+                        <ul class="menu">                            
+                            @foreach (Section sec in tab.Sections.OrderBy(x => x.Position))
+                            {
+                                if (!sec.IsHidden)
+                                {
+                                    var selectedSection = ((t.Equals(tab.UrlTitle) && s.Equals(sec.UrlTitle)) ? "active" : "");
+                                                  
+                                    <li class="leaf">                                
+                                        @if (sec.PageId != null)
+                                        {
+                                            <a href="/@tab.UrlTitle/@sec.UrlTitle" class="@selectedSection">@sec.Title</a>                                    
+                                        }
+                                        else
+                                        {
+                                            @sec.Title
+                                        }                                    
+
+                                        @if (sec.Links.Count > 0)
+                                        {
+                                            <ul class="menu">                                    
+                                            @foreach (Link link in sec.Links.OrderBy(x => x.Position))
+                                            {
+                                                if (!link.IsHidden)
+                                                {
+                                                    var selectedLink = ((t.Equals(tab.UrlTitle) && s.Equals(sec.UrlTitle) && p.Equals(link.UrlTitle)) ? "active" : "");
+                                        
+                                                    <li class="leaf">
+                                                        <a href="/@tab.UrlTitle/@sec.UrlTitle/@link.UrlTitle" class="@selectedLink">@link.Title</a>                                            
+                                                    </li>  
+                                                }
+                                            }
+                                            </ul>                                    
+                                        }
+                                    </li>                                
+                                        sectionCounter++;
+                                }
+                            }
+                        </ul> 
+                                         
+                    }
+                </li>
+                tabCounter++;
+            }
+        }  
+    } 
+    </ul>
+</nav>
+

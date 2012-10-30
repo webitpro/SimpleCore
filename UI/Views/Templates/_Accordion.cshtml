@@ -1,0 +1,75 @@
+﻿@model Core.Models.Page
+@{ var pg = Model; }
+
+<h1 class="title" id="page-title">@pg.Title</h1>
+
+<article class="page-accordion">
+  @{
+      Intro intro = (Intro)Engine.Page.Component.Retrieve(@pg.Id, Engine.Component.Type.Intro);
+      if(intro != null)
+      {
+          <div class="page-component">
+            <div class="intro">
+                @Html.Raw(HttpUtility.HtmlDecode(intro.Content))
+            </div>
+          </div>
+      }
+            
+  }
+  @{
+      IEnumerable<Accordion> data = pg.Accordions.Where(x => x.PageId == pg.Id).OrderBy(x => x.Position);
+      if (data != null)
+      {
+          if (data.Count() > 0)
+          {
+              var ctr = 0;
+              var active = "";
+              foreach (var item in data)
+              {
+                  active = ((ctr == 0) ? " active" : "");
+
+                <div class="acc-wrapper">
+                  <div class="acc-inner inner">
+                    <h2 class="acc_trigger @active"><a href="#" onclick="Accordion.SetState(this);">@item.Header</a></h2>
+                    <div class="acc_container @active">
+                      @Html.Raw(HttpUtility.HtmlDecode(item.Body))
+                    </div>
+                  </div>
+                </div>
+                ctr++;
+              }
+          }
+      }
+  }  
+</article>
+
+<script type="text/javascript">
+
+  $(document).ready(function ()
+  {
+      setTimeout(function ()
+      {
+          $('.active.acc_container').slideDown('slow');
+      }, 1000);
+  });
+
+  var Accordion = 
+  {
+      SetState: function(e)
+      {
+          //deactivate item that's already open
+          $('.active.acc_container').slideUp('slow', function ()
+          {
+              $('.active.acc_trigger').removeClass('active');
+
+              //activate clicked item
+              var trigger = $(e).parent('.acc_trigger');
+              var container = $(trigger).next('.acc_container');
+
+              $(trigger).addClass('active');
+              $(container).slideDown('slow').addClass('active');
+
+          }).removeClass('active');
+      }
+  };
+</script>

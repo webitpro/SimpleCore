@@ -1,0 +1,64 @@
+﻿@model Core.Models.Page
+@{
+    ViewBag.Title = ViewData["Title"];
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    Security.Role role = (Security.Role)Security.User.GetInfo(Core.Helpers.Security.AuthenticatedUser.Info.Role); 
+}
+
+<div class="actionBox">
+    <h2>@ViewData["Title"]</h2>
+    <div class="actionContent">
+        
+        @{ Html.BeginForm(new { controller="Page", action=ViewData["Action"] }); }
+
+        @if(!ViewData.ModelState.IsValid)
+        {
+            <p class="error">@Html.ValidationSummary(true)</p>
+        }
+        @if(ViewData["Action"].Equals("Update"))
+        {
+            @Html.HiddenFor(m => m.Id)
+        }
+
+        <h4>Template:</h4>
+        @Html.DropDownListFor(m => m.Template, Form.Element.DropDown.Template.List("", role))
+        <span class="error">@Html.ValidationMessageFor(m=>m.Template)</span>
+        @{ 
+            var display = false;
+            if(Engine.Page.HomePageExists())
+            {
+               //home page exists
+                if(Model != null)
+                {
+                    if(Model.IsHomePage == true)
+                    {
+                        display = true;
+                    }
+                }
+            }
+            else
+            {
+                //home page does not exist
+                display = true;
+            }
+         }
+        @if(display)
+        {
+            <h4>Is Home Page? @Html.CheckBoxFor(m=>m.IsHomePage)</h4>
+        }
+       
+        <span class="error">@Html.ValidationMessageFor(m=>m.IsHomePage)</span>
+
+        <h4>Title:</h4>
+        @Html.TextBoxFor(m=>m.Title)
+        <span class="error">@Html.ValidationMessageFor(m=>m.Title)</span>
+
+        <div class="buttonContainer">
+            <input type="submit" value="Save" class="button" />
+            <input type="button" value="Cancel" class="button" onclick="window.location='@Url.Action("Index", "Page")';" />            
+        </div>
+
+        @{ Html.EndForm(); }
+    </div>
+</div>

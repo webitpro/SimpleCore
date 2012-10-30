@@ -1,0 +1,27 @@
+﻿<div class="pager">
+@{
+    Dictionary<string, object> htmlOptions = new Dictionary<string, object>() { { "class", "element" } };
+    int numOfPages = (int)ViewData.Eval("NumOfPages");
+    int currentPage = (int)ViewData.Eval("CurrentPage");
+}
+
+@if (numOfPages > 1)
+{
+    for (int i = 1; i <= numOfPages; i++)
+    {
+        if (currentPage != i)
+        {
+            @Html.RouteLink(i.ToString(), Pager.Route.Paged(Html.ViewContext, i), htmlOptions)
+        }
+        else
+        {
+            <span class="selectedElement">@i</span>
+        }
+
+        if (i < numOfPages)
+        {
+            <span class="divider">|</span>
+        }
+    }
+}
+</div>

@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B4AE0442-CDA4-4718-8C6F-DACD1EF332C4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Helpers</RootNamespace>
+    <AssemblyName>Helpers</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DynamicData.EFCodeFirstProvider">
+      <HintPath>..\..\..\packages\DynamicData.EFCodeFirstProvider.0.4.1.0\lib\net40\DynamicData.EFCodeFirstProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\Enums\Enumerators.cs" />
+    <Compile Include="Helpers\Action.Result\CSV.cs" />
+    <Compile Include="Helpers\Action.Result\DownloadableFile.cs" />
+    <Compile Include="Helpers\Scripts\Script.cs" />
+    <Compile Include="Core\Config\Config.cs" />
+    <Compile Include="Core\dB\Context.cs" />
+    <Compile Include="Core\dB\Init.cs" />
+    <Compile Include="Core\dB\Repository.cs" />
+    <Compile Include="Core\Error\Error.cs" />
+    <Compile Include="Helpers\DigitalFile\DigitalFile.cs" />
+    <Compile Include="Helpers\DigitalFile\UploadBinder.cs" />
+    <Compile Include="Helpers\Integrate\GoogleMap.cs" />
+    <Compile Include="Core\Engine\Navigation.cs" />
+    <Compile Include="Core\Engine\Page.cs" />
+    <Compile Include="_Ext\ApplicationContext.cs" />
+    <Compile Include="_Ext\Config.cs" />
+    <Compile Include="_Ext\Form.cs" />
+    <Compile Include="Helpers\Form.Element\Form.cs" />
+    <Compile Include="Helpers\Pager\Pager.cs" />
+    <Compile Include="Helpers\Parsers\CSV\CSVParserEngine.cs" />
+    <Compile Include="Helpers\Parsers\CSV\model\CSV.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Core\Api\Response.cs" />
+    <Compile Include="Core\Api\Jsonp.cs" />
+    <Compile Include="Core\Security\AuthenticatedUser.cs" />
+    <Compile Include="Core\Security\AuthorizationFilter.cs" />
+    <Compile Include="Core\Security\Security.cs" />
+    <Compile Include="_Ext\Meta.cs" />
+    <Compile Include="_Ext\Security.cs" />
+    <Compile Include="_Ext\Enumerators.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Library\Library.csproj">
+      <Project>{B9332022-9EC3-44BE-86CD-9E3439C36CB0}</Project>
+      <Name>Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{A700F15B-388C-4C39-B05F-719E056B4024}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{38087C63-D5BA-4450-90F8-66F63DFE7EE1}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

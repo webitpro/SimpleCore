@@ -1,0 +1,17 @@
+﻿@model Core.Models.Page
+@{ var pg = Model; }
+
+<h1 class="title" id="page-title">@pg.Title</h1>
+<article class="page-static">
+  @if(pg.StaticPages.Count > 0)
+  {
+            
+      StaticPage page = pg.StaticPages.SingleOrDefault(x => x.PageId == pg.Id);
+      if (page != null)
+      {
+          <div class="raw-html">
+            @Html.Raw(HttpUtility.HtmlDecode(page.Content))
+          </div>
+      }
+  } 
+</article>

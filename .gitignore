@@ -1,0 +1,16 @@
+
+#Build results
+[Dd]ebug/
+[Rr]elease/
+obj/
+
+*.cache
+
+/Projects/Resources/Content/.sass-cache/*
+
+
+
+
+
+
+

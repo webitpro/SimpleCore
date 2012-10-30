@@ -1,0 +1,22 @@
+﻿@{
+    if (Core.Helpers.Security.User.IsAuthenticated())
+    {
+   
+            var a = ViewContext.RouteData.Values["action"].ToString();
+            var c = ViewContext.RouteData.Values["controller"].ToString();
+
+            Security.Role role = (Security.Role)Security.User.GetInfo(Core.Helpers.Security.AuthenticatedUser.Info.Role);
+     
+        @Html.ActionLink("Dashboard", "Index", new { controller = "Dashboard" }, new { @class = "navButton" + ((a.Equals("Index") && c.Equals("Dashboard")) ? " selected" : "") });
+        if(role ==  Security.Role.Super_Administrator || role == Security.Role.Administrator || role == Security.Role.Editor)
+        {   
+            if(role != Security.Role.Editor)
+            {                                                                               
+                @Html.ActionLink("Accounts", "Index", new { controller = "Account" }, new { @class = "navButton" + ((c.Equals("Account")) ? " selected" : "") });
+            }
+                                                                                                                                                                                                                                                                                                              
+            @Html.ActionLink("Pages", "Index", new { controller = "Page" }, new { @class = "navButton" + ((c.Equals("Page") || c.Equals("StaticPage") || c.Equals("CustomPage") || c.Equals("AccordionPage")) ? " selected" : "") });
+            @Html.ActionLink("Navigation", "Index", new { controller = "Navigation" }, new { @class = "navButton" + ((c.Equals("Navigation") || c.Equals("NavTab") || c.Equals("NavSection") || c.Equals("NavLink")) ? " selected" : "") });
+        }
+    }
+}
