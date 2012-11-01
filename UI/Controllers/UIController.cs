@@ -12,7 +12,5 @@ namespace Core.Controllers
         {
             return View();
         }
-
-
     }
 }

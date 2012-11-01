@@ -169,6 +169,10 @@
     <Content Include="Content\images\admin\footerLogo.png" />
     <Content Include="Content\images\admin\navBg.jpg" />
     <Content Include="Content\images\admin\patternBg.jpg" />
+    <Content Include="Content\js\jquery\jquery.js" />
+    <Content Include="Content\js\jquery\jquery.min.js">
+      <DependentUpon>jquery.js</DependentUpon>
+    </Content>
     <Content Include="Content\js\lib\engine\NavEngine.js" />
     <Content Include="Content\js\lib\engine\NavEngine.min.js">
       <DependentUpon>NavEngine.js</DependentUpon>
@@ -214,16 +218,19 @@
     <Content Include="Content\js\lib\tools\ajaxupload\jquery.blockUI.js" />
     <Content Include="Content\js\lib\tools\ajaxupload\jquery.form.js" />
     <Content Include="Content\js\lib\tools\html5\html.js" />
-    <Content Include="Content\js\lib\tools\html5\html.min.js" />
+    <Content Include="Content\js\lib\tools\html5\html.min.js">
+      <DependentUpon>html.js</DependentUpon>
+    </Content>
     <Content Include="Content\js\lib\tools\html5\html5-respond.js" />
-    <Content Include="Content\js\lib\tools\html5\html5-respond.min.js" />
+    <Content Include="Content\js\lib\tools\html5\html5-respond.min.js">
+      <DependentUpon>html5-respond.js</DependentUpon>
+    </Content>
     <Content Include="Content\js\lib\tools\nailthumb\jquery.imgpreload.js" />
     <Content Include="Content\js\lib\tools\nailthumb\jquery.imgpreload.min.js">
       <DependentUpon>jquery.imgpreload.js</DependentUpon>
     </Content>
     <Content Include="Content\js\lib\tools\nailthumb\jquery.nailthumb.js" />
     <Content Include="Content\js\lib\Loader.js" />
-    <Content Include="Content\js\jquery\jquery.min.js" />
     <Content Include="Content\js\lib\Loader.min.js">
       <DependentUpon>Loader.js</DependentUpon>
     </Content>
