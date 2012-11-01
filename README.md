@@ -27,7 +27,8 @@ Solution
 		query string, arrays, email etc.
 		As needed you can add and/or modify existing classes in order to enhance or extend functionality.
 	Models
-		Consists of Models (required for the engine to run) covering Administration and Public Facing portion of the website.
+		Consists of Models (required for the engine to run) covering Administration and Public Facing portion of the 
+		website.
 		Tab, Section, Link are part of the Navigation / Routing Engine
 		Page, Static Page, Custom Page, Accordion, PageComponents and Intro are part of Page and Page Template definitions
 		Account is part of the Administration section and defines the basic model of the user with different security roles
@@ -40,8 +41,8 @@ Solution
 		Reference class methods allow for dynamic creation of the path to the resource files
 	UI
 		Public facing site with the core engine that reads/displays the pages created through the Administration section.
-		Projects and Areas contain other projects within this solution but they CANNOT be “included”, otherwise there will be 
-		some conflicts when trying to build-up solution
+		Projects and Areas contain other projects within this solution but they CANNOT be “included”, otherwise there 
+		will be some conflicts when trying to build-up solution
 		UIController, Index page under /Views/UI/ and files under Templates directory are the core of the engine. DO NOT 
 		delete these files! If you fully understand the engine you could modify these files to extend or enhance the 
 		functionality.
