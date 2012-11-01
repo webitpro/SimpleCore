@@ -23,9 +23,9 @@ namespace Core.Helpers
                     FirstName = "Dragan",
                     LastName = "Rusnov",
                     Email = "drusnov@magnersanborn.com",
-                    Password = Security.Password.GenerateHash("drusnov@magnersanborn.com", "Ru$n0v"),
+                    Password = Security.Password.GenerateHash("drusnov@magnersanborn.com", "$impleC0re"),
                     Registered = DateTime.Now,
-                    SecurityRole = Security.Role.Administrator.ToString(),
+                    SecurityRole = Security.Role.Super_Administrator.ToString(),
                     Status = Enums.Status.Account.Active.ToString()
                 });
                 /*accounts.Add(new Account
@@ -33,39 +33,41 @@ namespace Core.Helpers
                     FirstName = "Ethan",
                     LastName = "Craft",
                     Email = "ecraft@magnersanborn.com",
-                    Password = Security.Password.GenerateHash("ecraft@magnersanborn.com", "masaDev2012"),
+                    Password = Security.Password.GenerateHash("ecraft@magnersanborn.com", "$impleC0re"),
                     Registered = DateTime.Now,
-                    SecurityRole = Security.Role.Administrator.ToString(),
+                    SecurityRole = Security.Role.Super_Administrator.ToString(),
                     Status = Enums.Status.Account.Active.ToString()
                 });
-                accounts.Add(new Account
-                {
-                    FirstName = "Marshall",
-                    LastName = "Moore",
-                    Email = "mmoore@magnersanborn.com",
-                    Password = Security.Password.GenerateHash("mmoore@magnersanborn.com", "masaDev2012"),
-                    Registered = DateTime.Now,
-                    SecurityRole = Security.Role.Administrator.ToString(),
-                    Status = Enums.Status.Account.Active.ToString()
-                });*/
+                */
                 accounts.Add(new Account
                 {
                     FirstName = "Jeremy",
                     LastName = "Caldwell",
                     Email = "jcaldwell@magnersanborn.com",
-                    Password = Security.Password.GenerateHash("jcaldwell@magnersanborn.com", "masaDev2012"),
+                    Password = Security.Password.GenerateHash("jcaldwell@magnersanborn.com", "$impleC0re"),
+                    Registered = DateTime.Now,
+                    SecurityRole = Security.Role.Administrator.ToString(),
+                    Status = Enums.Status.Account.Active.ToString()
+                });                
+                accounts.Add(new Account
+                {
+                    FirstName = "Marshall",
+                    LastName = "Moore",
+                    Email = "mmoore@magnersanborn.com",
+                    Password = Security.Password.GenerateHash("mmoore@magnersanborn.com", "$impleC0re"),
                     Registered = DateTime.Now,
                     SecurityRole = Security.Role.Administrator.ToString(),
                     Status = Enums.Status.Account.Active.ToString()
                 });
-                /*accounts.Add(new Account
+                /*
+                accounts.Add(new Account
                 {
                     FirstName = "Areli",
                     LastName = "Nathanson",
                     Email = "anathanson@magnersanborn.com",
-                    Password = Security.Password.GenerateHash("anathanson@magnersanborn.com", "masaDev2012"),
+                    Password = Security.Password.GenerateHash("anathanson@magnersanborn.com", "$impleC0re"),
                     Registered = DateTime.Now,
-                    SecurityRole = Security.Role.Administrator.ToString(),
+                    SecurityRole = Security.Role.Editor.ToString(),
                     Status = Enums.Status.Account.Active.ToString()
                 });
                 accounts.Add(new Account
@@ -73,11 +75,53 @@ namespace Core.Helpers
                     FirstName = "Alexa",
                     LastName = "Lohmeyer",
                     Email = "alohmeyer@magnersanborn.com",
-                    Password = Security.Password.GenerateHash("alohmeyer@magnersanborn.com", "masaDev2012"),
+                    Password = Security.Password.GenerateHash("alohmeyer@magnersanborn.com", "$impleC0re"),
+                    Registered = DateTime.Now,
+                    SecurityRole = Security.Role.Editor.ToString(),
+                    Status = Enums.Status.Account.Active.ToString()
+                });*/
+
+                /* GENERIC ACCOUNTS */
+                accounts.Add(new Account 
+                {
+                    FirstName = "Generic",
+                    LastName = "Super_Administrator",
+                    Email = "superadministrator@simple-core.net",
+                    Password = Security.Password.GenerateHash("superadministrator@simple-core.net", "$impleC0re"),
+                    Registered = DateTime.Now,
+                    SecurityRole = Security.Role.Super_Administrator.ToString(),
+                    Status = Enums.Status.Account.Active.ToString()
+                });
+                accounts.Add(new Account
+                {
+                    FirstName = "Generic",
+                    LastName = "Administrator",
+                    Email = "administrator@simple-core.net",
+                    Password = Security.Password.GenerateHash("administrator@simple-core.net", "$impleC0re"),
                     Registered = DateTime.Now,
                     SecurityRole = Security.Role.Administrator.ToString(),
                     Status = Enums.Status.Account.Active.ToString()
-                });*/
+                });
+                accounts.Add(new Account
+                {
+                    FirstName = "Generic",
+                    LastName = "Editor",
+                    Email = "editor@simple-core.net",
+                    Password = Security.Password.GenerateHash("editor@simple-core.net", "$impleC0re"),
+                    Registered = DateTime.Now,
+                    SecurityRole = Security.Role.Editor.ToString(),
+                    Status = Enums.Status.Account.Active.ToString()
+                });
+                accounts.Add(new Account
+                {
+                    FirstName = "Generic",
+                    LastName = "User",
+                    Email = "user@simple-core.net",
+                    Password = Security.Password.GenerateHash("user@simple-core.net", "$impleC0re"),
+                    Registered = DateTime.Now,
+                    SecurityRole = Security.Role.User.ToString(),
+                    Status = Enums.Status.Account.Active.ToString()
+                });
 
 
                 foreach (Account acc in accounts)

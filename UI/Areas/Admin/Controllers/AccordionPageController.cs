@@ -9,7 +9,7 @@ using Core.Library;
 
 namespace Core.Areas.Admin.Controllers
 {
-    [AuthorizationFilter(Security.Role.Administrator)]
+    [AuthorizationFilter(Security.Role.Super_Administrator, Security.Role.Administrator, Security.Role.Editor)]
     public class AccordionPageController : Controller
     {
         private const int resultsPerPage = 25;
