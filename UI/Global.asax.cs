@@ -7,6 +7,8 @@ using System.Web.Routing;
 using Core;
 using Core.Helpers;
 using System.Data.Entity;
+using System.Security.Principal;
+using System.Threading;
 
 namespace Core
 {
@@ -66,5 +68,7 @@ namespace Core
             DB.Init db = new DB.Init();
             db.InitializeDatabase(new DB.Context());
         }
+
+       
     }
 }

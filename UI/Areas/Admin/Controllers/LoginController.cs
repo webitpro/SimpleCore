@@ -12,7 +12,7 @@ namespace Core.Areas.Admin.Controllers
 {
     public class LoginController : Controller
     {
-        public virtual ActionResult Login(string returnUrl)
+        public virtual ActionResult Login(string returnUrl, bool logout = false)
         {
             if (Security.User.IsAuthenticated())
             {
@@ -64,6 +64,7 @@ namespace Core.Areas.Admin.Controllers
         public ActionResult Logout()
         {
             Security.ClearCredentials();
+            
             return RedirectToAction("Login", "Login");
         }
         
