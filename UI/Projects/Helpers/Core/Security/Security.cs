@@ -11,6 +11,11 @@ namespace Core.Helpers
     public static partial class Security
     {
         /* METHODS */
+        public static string GetCookieName()
+        {            
+            return FormsAuthentication.FormsCookieName;            
+        }
+
         public static bool Authenticate(string username, string password, bool? rememberMe)
         {
             if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
@@ -52,6 +57,9 @@ namespace Core.Helpers
         public static void SetCredentials(AuthenticatedUser user, bool rememberMe)
         {
             DateTime expiration = rememberMe ? DateTime.Now.AddMonths(1) : DateTime.Now.AddHours(3);
+            string name = GetCookieName();
+            
+            //set forms auth ticket
             FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
                 1,
                 user.Name,
@@ -62,34 +70,42 @@ namespace Core.Helpers
                 FormsAuthentication.FormsCookiePath
                 );
             string encTicket = FormsAuthentication.Encrypt(ticket);
-            HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
-
-            if (rememberMe)
-            {
-                cookie.Expires = expiration;
-            }
+            
+            //set cookie
+            HttpCookie cookie = new HttpCookie(name);
+            cookie.Value = encTicket;
+            cookie.Expires = expiration;
             cookie.Domain = Config.ActiveConfiguration.Domain;
 
-            HttpContext.Current.Response.Cookies.Add(cookie);
-            HttpContext.Current.Session.Add("app_user", user);
+
+            HttpContext.Current.Response.Cookies.Add(cookie);            
+            HttpContext.Current.Session.Add(name, user);           
 
         }
 
         public static void ClearCredentials()
         {
+            string name = GetCookieName();
+
             FormsAuthentication.SignOut();
             HttpContext.Current.Session.Abandon();
-            HttpContext.Current.Session.Clear();            
-            HttpContext.Current.Session.Remove("app_user");
-            HttpContext.Current.Session.RemoveAll();
-            HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName].Expires = DateTime.Now.AddYears(-1);
-            HttpContext.Current.Response.Cookies.Remove(FormsAuthentication.FormsCookieName);
-            HttpContext.Current.Request.Cookies.Remove(FormsAuthentication.FormsCookieName);
+
+           //clear authentication cookie
+           HttpCookie cookie = new HttpCookie(name);
+           cookie.Expires = DateTime.Now.AddYears(-1);
+           HttpContext.Current.Response.Cookies.Add(cookie);
+            
+
+            //clear session cookie
+            HttpContext.Current.Session.Remove(name);
+            
         }
 
         private static AuthenticatedUser GetAuthenticatedUser()
         {
-            AuthenticatedUser user = HttpContext.Current.Session["app_user"] as AuthenticatedUser;
+            string name = GetCookieName();
+
+            AuthenticatedUser user = HttpContext.Current.Session[name] as AuthenticatedUser;
             if (user != null)
             {
                 return user;
@@ -99,7 +115,7 @@ namespace Core.Helpers
             if (ident != null)
             {
                 user = AuthenticatedUser.FromString(ident.Ticket.UserData);
-                HttpContext.Current.Session.Add("app_user", user);
+                HttpContext.Current.Session.Add(name, user);
 
                 return user;
             }
@@ -161,12 +177,19 @@ namespace Core.Helpers
 
             public static bool IsAuthenticated()
             {
-                if (HttpContext.Current.Session["app_user"] != null)
-                {
-                    return HttpContext.Current.User.Identity.IsAuthenticated;
-                }
+                string name = GetCookieName();
 
-                return false;
+                bool isAuthenticated = HttpContext.Current.User.Identity.IsAuthenticated;
+                if (HttpContext.Current.Session[name] != null)
+                {
+                    isAuthenticated = HttpContext.Current.User.Identity.IsAuthenticated;
+                }
+                else
+                {
+                    isAuthenticated = false;
+                }
+               
+                return isAuthenticated;
             }
 
             public static bool IsAllowed(Security.Role[] roles)
@@ -179,6 +202,8 @@ namespace Core.Helpers
 
                 return false;
             }
+
+            
         }
     }
 }
