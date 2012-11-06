@@ -4,18 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.IO;
-using Core.Library;
 
 namespace Core.Helpers
 {
     public static partial class Security
     {
-        /* METHODS */
-        public static string GetCookieName()
-        {            
-            return FormsAuthentication.FormsCookieName;            
-        }
-
+        //AUTHENTICATE
         public static bool Authenticate(string username, string password, bool? rememberMe)
         {
             if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
@@ -57,9 +51,6 @@ namespace Core.Helpers
         public static void SetCredentials(AuthenticatedUser user, bool rememberMe)
         {
             DateTime expiration = rememberMe ? DateTime.Now.AddMonths(1) : DateTime.Now.AddHours(3);
-            string name = GetCookieName();
-            
-            //set forms auth ticket
             FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
                 1,
                 user.Name,
@@ -70,42 +61,28 @@ namespace Core.Helpers
                 FormsAuthentication.FormsCookiePath
                 );
             string encTicket = FormsAuthentication.Encrypt(ticket);
-            
-            //set cookie
-            HttpCookie cookie = new HttpCookie(name);
-            cookie.Value = encTicket;
-            cookie.Expires = expiration;
-            cookie.Domain = Config.ActiveConfiguration.Domain;
+            HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
 
+            if (rememberMe)
+            {
+                cookie.Expires = expiration;
+            }
 
-            HttpContext.Current.Response.Cookies.Add(cookie);            
-            HttpContext.Current.Session.Add(name, user);           
+            HttpContext.Current.Response.Cookies.Add(cookie);
+            HttpContext.Current.Session.Add("app_user", user);
 
         }
 
         public static void ClearCredentials()
         {
-            string name = GetCookieName();
-
             FormsAuthentication.SignOut();
             HttpContext.Current.Session.Abandon();
-
-           //clear authentication cookie
-           HttpCookie cookie = new HttpCookie(name);
-           cookie.Expires = DateTime.Now.AddYears(-1);
-           HttpContext.Current.Response.Cookies.Add(cookie);
-            
-
-            //clear session cookie
-            HttpContext.Current.Session.Remove(name);
-            
+            HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName].Expires = DateTime.MinValue;
         }
 
         private static AuthenticatedUser GetAuthenticatedUser()
         {
-            string name = GetCookieName();
-
-            AuthenticatedUser user = HttpContext.Current.Session[name] as AuthenticatedUser;
+            AuthenticatedUser user = HttpContext.Current.Session["app_user"] as AuthenticatedUser;
             if (user != null)
             {
                 return user;
@@ -115,15 +92,13 @@ namespace Core.Helpers
             if (ident != null)
             {
                 user = AuthenticatedUser.FromString(ident.Ticket.UserData);
-                HttpContext.Current.Session.Add(name, user);
+                HttpContext.Current.Session.Add("app_user", user);
 
                 return user;
             }
 
             return null;
         }
-
-        /* CLASSES */
 
         public static class Password
         {
@@ -134,23 +109,7 @@ namespace Core.Helpers
 
             public static string GenerateRandom()
             {
-                string pass = CleanUp(Path.GetRandomFileName());
-                while (!Utils.Validate.PasswordFormat(pass))
-                {
-                    pass = CleanUp(Path.GetRandomFileName());
-                }
-
-                return pass;
-            }
-
-            public static string CleanUp(string s)
-            {
-                string cleanedUpPass = "";
-                string upperCaseChar = s.Substring(0, 1).ToUpper();
-                string lowerCaseChar = s.Substring(1, 1).ToLower();
-                string diff = s.Substring(2);
-                cleanedUpPass = upperCaseChar + lowerCaseChar + diff;
-                return cleanedUpPass.Replace(".", "").Replace("/", "").Replace(@"\", "").Replace("=", "").Replace("%", "").Replace("'", "");
+                return Path.GetRandomFileName().Replace(".", "").Replace("/", "").Replace(@"\", "");
             }
         }
 
@@ -177,19 +136,7 @@ namespace Core.Helpers
 
             public static bool IsAuthenticated()
             {
-                string name = GetCookieName();
-
-                bool isAuthenticated = HttpContext.Current.User.Identity.IsAuthenticated;
-                if (HttpContext.Current.Session[name] != null)
-                {
-                    isAuthenticated = HttpContext.Current.User.Identity.IsAuthenticated;
-                }
-                else
-                {
-                    isAuthenticated = false;
-                }
-               
-                return isAuthenticated;
+                return HttpContext.Current.User.Identity.IsAuthenticated;
             }
 
             public static bool IsAllowed(Security.Role[] roles)
@@ -197,13 +144,11 @@ namespace Core.Helpers
                 if (IsAuthenticated())
                 {
                     AuthenticatedUser user = GetAuthenticatedUser();
-                    return (roles.Contains(user.Role) || user.Role == Security.Role.Administrator || user.Role == Security.Role.Super_Administrator);
+                    return (roles.Contains(user.Role) || user.Role == Security.Role.Administrator);
                 }
 
                 return false;
             }
-
-            
         }
     }
 }
