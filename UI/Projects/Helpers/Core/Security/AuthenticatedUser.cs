@@ -7,7 +7,7 @@ using Core.Models;
 
 namespace Core.Helpers
 {
-    public static partial class Security
+    public partial class Security
     {
         public class AuthenticatedUser
         {
