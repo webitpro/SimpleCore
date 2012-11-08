@@ -1,4 +1,4 @@
-﻿var MobileDetect = 
+﻿var MobileDetect =
 {
     Android: function ()
     {
@@ -18,6 +18,6 @@
     },
     Any: function ()
     {
-        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows());
+        return (MobileDetect.Android() || MobileDetect.BlackBerry() || MobileDetect.IOS() || MobileDetect.Windows());
     }
 };

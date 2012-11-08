@@ -20,7 +20,7 @@
         {
             var expires = document.createElement("meta");
             expires.setAttribute("http-equiv", "expires");
-            expires.setAttribute("content", Loader.CalcGMTTime(min));
+            expires.setAttribute("content", Utils.CalcGMTTime(min));
             head.appendChild(expires);
         }
     },

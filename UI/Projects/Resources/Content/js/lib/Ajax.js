@@ -18,9 +18,12 @@
     },
     Error: function (r)
     {
+        var global = $('p.error');
+        var individual = $('span.error');
+
         //reset errors
-        $('.form p.error').html('');
-        $('.form span.error').html('');
+        global.html('');
+        individual.html('');
 
         //not successful
         for (i = 0; i < r.Errors.length; i++)
@@ -30,30 +33,29 @@
             if (error.Id != "")
             {
                 //specific error
-                $('#' + error.Id).next('span.error').html(error.Message).fadeTo('slow', 1);
-
+                $('#' + error.Id).next('span.error').html(error.Text).fadeTo('slow', 1);
             }
             else
             {
                 //global error
-                $('.form p.error').append(error.Message + '<br />');
+                global.append(error.Text + '<br />');
             }
         }
 
-        $('.form p.error').fadeTo('slow', 1);
+        global.fadeTo('slow', 1);
     },
     Clear: function ()
     {
-        $('.form p.error').fadeTo('fast', 0);
-        $('.form p.error').html('');
-        $('.form span.error').fadeTo('fast', 0);
-        $('.form span.error').html('');
+        $('p.error').fadeTo('fast', 0);
+        $('p.error').html('');
+        $('span.error').fadeTo('fast', 0);
+        $('span.error').html('');
     },
-    Init: function ()
+    Init: function (id)
     {
         Ajax.Clear();
 
-        var position = $('.container h1:first').position();
+        var position = $(id).position();
         var left = position.left - 30;
         var top = position.top + 10;
 

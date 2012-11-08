@@ -43,21 +43,29 @@
   <script type="text/javascript" src="@Core.Resources.Reference.Url(Core.Resources.Reference.Directory.js, "Library.min.js", "lib")"></script>
 
   <script type="text/javascript">
-    //SET CACHING
-    Loader.Cache(60);
+      //SET CACHING
+      Lib.Utils(function ()
+      {
+          Utils.SetCache(60);
+      });
 
-    //check if mobile environment
-    Loader.Mobile(function () {
-      if (isMobile.any()) {
-        //LOAD MOBILE STYLE SHEETS / JAVASCRIPT / IMAGES
-        var arr = ['footerLogo.png', 'navBg.jpg', 'patterBg.jpg'];
-        Loader.Images(arr, '@Reference.Url(Reference.Directory.images, "", "")');
-      } else {
-        //LOAD REGULAR IMAGES
-        var arr = ['footerLogo.png', 'navBg.jpg', 'patternBg.jpg'];
-        Loader.Images(arr, '@Reference.Url(Reference.Directory.images, "", "")');
-       }
-    });   
+
+      //check if mobile environment
+      Lib.MobileDetect(function ()
+      {
+          if (MobileDetect.Any())
+          {
+              //LOAD MOBILE STYLE SHEETS / JAVASCRIPT / IMAGES
+              var arr = ['footerLogo.png', 'navBg.jpg', 'patterBg.jpg'];
+              Load.Images(arr, '@Reference.Url(Reference.Directory.images, "", "")');
+          }
+          else
+          {
+              //LOAD REGULAR IMAGES
+              var arr = ['footerLogo.png', 'navBg.jpg', 'patternBg.jpg'];
+              Load.Images(arr, '@Reference.Url(Reference.Directory.images, "", "")');
+          }
+      });  
     </script>
 
     @Html.Scripts().JavaScripts.Render()
